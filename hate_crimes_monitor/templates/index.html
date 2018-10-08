@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Monitor de Crimes de Ódio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"/>
+    <style type="text/css">
+      .hidden.divider, .ui.container { margin: 3rem 0}
+    </style>
+
+  </head>
+  <body>
+
+    <div class="ui container">
+      <h1 class="ui header">
+        Monitor de Crimes de Ódio
+      </h1>
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    <div class="ui container cards">
+      {% for case in table %}
+      {% for story in case.stories %}
+      <a href="{{ story.url }}" title="{{ story.titulo }}" class="ui card">
+        <div class="image">
+          <img src="{{ story.imagem_ou_video }}">
+        </div>
+        <div class="content">
+          <div class="header">{{ story.titulo }}</div>
+          <div class="meta">
+            <span class="date">{{ case.data.strftime('%d/%m/%Y') }}</span>
+          </div>
+          <div class="description">
+            {{ story.resumo }}
+          </div>
+        </div>
+        <div class="extra content">
+          <i class="user icon"></i>
+          {{ case.stories|length }} aparições na mídia
+        </div>
+      </a><!-- end .card -->
+      {% endfor %}
+      {% endfor %}
+    </div><!-- end .cards -->
+
+  </body>
+</html>

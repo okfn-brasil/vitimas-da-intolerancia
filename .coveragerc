@@ -1,0 +1,4 @@
+[run]
+source = hate_crimes_monitor
+omit =
+    **/tests/*.py
