@@ -1,8 +1,8 @@
 from datetime import date
 from unittest.mock import PropertyMock
 
-from hate_crimes_monitor import app
-from hate_crimes_monitor.data import Data
+from violence import app
+from violence.data import Data
 
 
 TABLE = (
@@ -31,7 +31,6 @@ def test_home_contents(mocker):
     table.return_value = TABLE
     _, response = app.test_client.get('/')
     expected_terms = (
-        'Monitor de Crimes de Ódio',
         '07/10/2018',
         'Foo Bar',
         'https://foo.bar/',

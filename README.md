@@ -1,4 +1,6 @@
-# Hate Crimes Monitor – for political motivated assaults in Brazil
+# #ViolênciaNãoTemPartido
+
+Hate crimes monitor for political motivated assaults in Brazil.
 
 Requires Python 3.7 and Redis.
 
@@ -9,7 +11,7 @@ Spreadsheet ID
 Spin up the server with:
 
 ```sh
-$ gunicorn hate_crimes_monitor:app --worker-class sanic.worker.GunicornWorker
+$ gunicorn violence:app --worker-class sanic.worker.GunicornWorker
 ```
 
 Run tests with:

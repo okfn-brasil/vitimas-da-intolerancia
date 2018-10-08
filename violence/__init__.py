@@ -1,11 +1,11 @@
 from sanic import Sanic
 from sanic_jinja2 import SanicJinja2
 
-from hate_crimes_monitor.data import Data
+from violence.data import Data
 
 
 app = Sanic()
-jinja = SanicJinja2(app, pkg_name='hate_crimes_monitor')
+jinja = SanicJinja2(app, pkg_name='violence')
 app_data = Data(refresh_cache=True)
 
 

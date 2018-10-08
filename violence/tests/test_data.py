@@ -1,14 +1,14 @@
 from datetime import date
 from pathlib import Path
 
-from hate_crimes_monitor.data import Data
+from violence.data import Data
 
 
-FIXTURES = Path() / 'hate_crimes_monitor' / 'tests' / 'fixtures'
+FIXTURES = Path() / 'violence' / 'tests' / 'fixtures'
 
 
 def test_data_get_method(mocker):
-    get = mocker.patch('hate_crimes_monitor.data.requests.get')
+    get = mocker.patch('violence.data.requests.get')
     get.return_value.content = b'42'
     assert Data().get('cases') == b'42'
     get.assert_called_once()
