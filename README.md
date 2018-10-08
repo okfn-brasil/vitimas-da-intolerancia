@@ -11,7 +11,7 @@ Spreadsheet ID
 Spin up the server with:
 
 ```sh
-$ gunicorn violence:app --worker-class sanic.worker.GunicornWorker
+$ python run.py
 ```
 
 Run tests with:

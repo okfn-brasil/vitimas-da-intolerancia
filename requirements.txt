@@ -1,11 +1,12 @@
-gunicorn==19.9.0
-ipython==7.0.1
-pytest-cov==2.6.0
-pytest-mock==1.10.0
-pytest-sanic==0.1.13
 python-decouple==3.1
 redis==2.10.6
 requests==2.19.1
 rows==0.3.1
 sanic-jinja2==0.7.1
 sanic==0.8.3
+
+# development
+ipython==7.0.1
+pytest-cov==2.6.0
+pytest-mock==1.10.0
+pytest-sanic==0.1.13
