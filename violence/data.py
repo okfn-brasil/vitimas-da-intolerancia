@@ -53,11 +53,7 @@ class Data:
         return self.reload_from_google_spreadsheet()
 
     def get(self, csv_label):
-        mapping = {'cases': '1261886381', 'stories': '0'}
-        gid = mapping.get(csv_label)
-        if not gid:
-            return
-
+        gid = config(f'{csv_label.upper()}_SPREADSHEET_GID')
         return requests.get(self.BASE_URL + gid).content
 
     @staticmethod
