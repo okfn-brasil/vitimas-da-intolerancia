@@ -2,22 +2,7 @@ from dataclasses import dataclass
 from datetime import date
 from typing import List
 
-
-TAG_COLORS = {
-    'homicídio': 'red',
-    'agressão': 'orange',
-    'xenofobia': 'yellow',
-    'prisão': 'olive',
-    '': 'green',
-    'ameaça': 'teal',
-    '': 'blue',
-    '': 'violet',
-    'mulher': 'purple',
-    'homofobia': 'pink',
-    'jornalista': 'brown',
-    '': 'grey',
-    '': 'black',
-}
+from violence.settings import TAG_COLORS
 
 
 @dataclass

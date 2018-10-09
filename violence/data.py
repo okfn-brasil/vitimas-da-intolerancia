@@ -1,46 +1,28 @@
 import pickle
 from io import BytesIO
 
-import redis
 import requests
-from decouple import config
+from redis import StrictRedis
 from rows import import_from_csv
 
 from violence.models import Case, Story
-
-
-SPREADSHEET_ID = config('SPREADSHEET_ID')
-STORY_LABELS = (
-    ('url', 'url'),
-    ('veiculo', 'source'),
-    ('titulo', 'title'),
-    ('imagem_ou_video', 'image_or_video'),
-    ('id_caso', 'case_id'),
-    ('resumo', 'summary'),
-)
-CASE_LABELS = (
-    ('id', 'id'),
-    ('data', 'when'),
-    ('uf', 'state'),
-    ('municipio', 'city'),
-    ('tags', 'tags'),
+from violence.settings import (
+    BASE_SPREADSHEET_URL,
+    CACHE_DATA_FOR,
+    CASES_SPREADSHEET_GID,
+    CASE_LABELS,
+    REDIS_DB,
+    REDIS_URL,
+    STORIES_SPREADSHEET_GID,
+    STORY_LABELS,
 )
 
 
 class Data:
 
-    BASE_URL = (
-        f'https://docs.google.com/spreadsheets/u/0/d/{SPREADSHEET_ID}/'
-        f'export?format=csv&id={SPREADSHEET_ID}&gid='
-    )
-    CACHE_FOR = 3  # in hours
-
     def __init__(self, refresh_cache=False):
         self.cache_key = 'cases'
-        self.cache = redis.StrictRedis.from_url(
-            config('REDIS_URL', default='redis://localhost:6379/'),
-            db=config('REDIS_DB', default='0', cast=int)
-        )
+        self.cache = StrictRedis.from_url(REDIS_URL, db=REDIS_DB)
         if refresh_cache:
             self.reload_from_google_spreadsheet()
 
@@ -53,8 +35,11 @@ class Data:
         return self.reload_from_google_spreadsheet()
 
     def get(self, csv_label):
-        gid = config(f'{csv_label.upper()}_SPREADSHEET_GID')
-        return requests.get(self.BASE_URL + gid).content
+        switch = {
+            'cases': CASES_SPREADSHEET_GID,
+            'stories': STORIES_SPREADSHEET_GID
+        }
+        return requests.get(BASE_SPREADSHEET_URL + switch[csv_label]).content
 
     @staticmethod
     def serialize_cases(buffer):
@@ -110,5 +95,5 @@ class Data:
 
         cleaned_cases = tuple(case for case in cases if case.stories)
         serialized = pickle.dumps(cleaned_cases)
-        self.cache.set(self.cache_key, serialized, self.CACHE_FOR * 3600)
+        self.cache.set(self.cache_key, serialized, CACHE_DATA_FOR * 3600)
         return cases
