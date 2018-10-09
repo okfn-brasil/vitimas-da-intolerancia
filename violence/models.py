@@ -46,4 +46,4 @@ class Case:
         )
 
     def is_valid(self):
-        return self.when
+        return bool(self.when)
