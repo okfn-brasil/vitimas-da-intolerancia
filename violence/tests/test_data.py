@@ -21,6 +21,6 @@ def test_data_cases_property(mocker):
             get.side_effect = (cases.read(), stories.read())
 
     cases = Data().cases
-    assert len(cases) == 8
+    assert len(cases) == 6
     cases[0].when == date(2018, 10, 8)
     cases[-1].when == date(2018, 10, 3)

@@ -3,6 +3,23 @@ from datetime import date
 from typing import List
 
 
+TAG_COLORS = {
+    'homicídio': 'red',
+    'agressão': 'orange',
+    'xenofobia': 'yellow',
+    'prisão': 'olive',
+    '': 'green',
+    'ameaça': 'teal',
+    '': 'blue',
+    '': 'violet',
+    'mulher': 'purple',
+    'homofobia': 'pink',
+    'jornalista': 'brown',
+    '': 'grey',
+    '': 'black',
+}
+
+
 @dataclass
 class Story:
     url: str
@@ -31,3 +48,14 @@ class Case:
     city: str
     tags: List[str]
     stories: List[Story]
+
+    @property
+    def main_story(self):
+        return self.stories[0] if self.stories else None
+
+    @property
+    def tags_and_colors(self):
+        return (
+            (tag, TAG_COLORS.get(tag))
+            for tag in self.tags
+        )

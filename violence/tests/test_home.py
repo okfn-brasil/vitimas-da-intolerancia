@@ -37,17 +37,16 @@ def test_home_contents(mocker):
     cases.return_value = CASES
     _, response = app.test_client.get('/')
     expected_terms = (
-        '07/10/2018',
+        '#ViolênciaNãoTemPartido',
         'https://florianopol.is/',
-        # TODO 'DC',
+        'DC',
         'Foo Bar',
         'https://florianopol.is/cover.png',
         'Foo, bar!',
-        '07/10/2018',
-        # TODO 'SC',
-        # TODO 'Florianópolis',
-        # TODO 'homicídio',
-        # TODO 'mulher',
+        'SC',
+        'Florianópolis',
+        'homicídio',
+        'mulher',
     )
     for expected in expected_terms:
         assert expected in response.text

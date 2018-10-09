@@ -7,7 +7,13 @@
     <title>#ViolênciaNãoTemPartido</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"/>
     <style type="text/css">
-      .hidden.divider, .ui.container { margin: 3rem 0}
+      .ui.container { margin-top: 3rem }
+      .ui.card > .content > .header:not(.ui), .ui.cards > .card > .content > .header:not(.ui),
+      .tags,
+      .description {
+        margin-top: 1rem
+      }
+      .sources { clear: both; margin-top: 4rem }
     </style>
 
   </head>
@@ -17,30 +23,72 @@
       <h1 class="ui header">#ViolênciaNãoTemPartido</h1>
     </div>
 
-    <div class="ui hidden divider"></div>
-
     <div class="ui container cards">
       {% for case in cases %}
-      {% for story in case.stories %}
-      <a href="{{ story.url }}" title="{{ story.title }}" class="ui card">
+      <div class="ui card">
+
         <div class="image">
-          <img src="{{ story.image_or_video }}">
+          <img src="{{ case.main_story.image_or_video }}">
         </div>
+
         <div class="content">
-          <div class="header">{{ story.title }}</div>
+
           <div class="meta">
-            <span class="date">{{ case.when.strftime('%d/%m/%Y') }}</span>
+            <div class="ui label right floated">
+              <i class="globe icon"></i>
+              {{ case.city }}, {{ case.state }}
+            </div>
+            <span>{{ case.main_story.source }}</span>
           </div>
+
+          <a class="header" href="{{ case.main_story.url }}">
+            {{ case.main_story.title }}
+          </a>
+
+          <div class="extra tags">
+            {% for tag, color in case.tags_and_colors %}
+            <div class="ui label {{ color }}">{{ tag }}</div>
+            {% endfor %}
+          </div>
+
           <div class="description">
-            {{ story.summary }}
+            <p>{{ case.main_story.summary }}</p>
+            <a class="ui right floated" href="{{ case.main_story.url }}">
+              Matéria completa
+            </a>
           </div>
-        </div>
-        <div class="extra content">
-          <i class="user icon"></i>
-          {{ case.stories|length }} aparições na mídia
-        </div>
-      </a><!-- end .card -->
-      {% endfor %}
+
+          {% if case.stories|length > 1 %}
+          <div class="extra sources">
+            <div class="header">
+              <i class="newspaper outline icon"></i>
+              {% if case.stories|length == 2 %}
+              Outra fonte:
+              {% else %}
+              Outras {{ case.stories|length - 1 }} fontes:
+              {% endif %}
+            </div><!-- header -->
+
+            <div class="ui link list">
+              {% for story in case.stories %}
+              {% if not loop.first %}
+              <a href="{{ story.url }}">
+                <p>
+                  <span class="meta">{{ story.source }}</span><br>
+                  {{ story.title }}<br>
+                  &nbsp;
+                </p>
+              </a>
+              {% endif %}
+              {% endfor %}
+            </div><!-- end .list -->
+
+          </div><!-- end .extra -->
+          {% endif %}
+
+        </div><!-- end .content -->
+      </div><!-- end .card -->
+
       {% endfor %}
     </div><!-- end .cards -->
 
