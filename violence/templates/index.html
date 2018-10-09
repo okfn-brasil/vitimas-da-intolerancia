@@ -20,19 +20,19 @@
     <div class="ui hidden divider"></div>
 
     <div class="ui container cards">
-      {% for case in table %}
+      {% for case in cases %}
       {% for story in case.stories %}
-      <a href="{{ story.url }}" title="{{ story.titulo }}" class="ui card">
+      <a href="{{ story.url }}" title="{{ story.title }}" class="ui card">
         <div class="image">
-          <img src="{{ story.imagem_ou_video }}">
+          <img src="{{ story.image_or_video }}">
         </div>
         <div class="content">
-          <div class="header">{{ story.titulo }}</div>
+          <div class="header">{{ story.title }}</div>
           <div class="meta">
-            <span class="date">{{ case.data.strftime('%d/%m/%Y') }}</span>
+            <span class="date">{{ case.when.strftime('%d/%m/%Y') }}</span>
           </div>
           <div class="description">
-            {{ story.resumo }}
+            {{ story.summary }}
           </div>
         </div>
         <div class="extra content">

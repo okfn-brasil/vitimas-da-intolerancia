@@ -14,13 +14,13 @@ def test_data_get_method(mocker):
     get.assert_called_once()
 
 
-def test_data_table_property(mocker):
+def test_data_cases_property(mocker):
     get = mocker.patch.object(Data, 'get')
     with open(FIXTURES / 'cases.csv', 'rb') as cases:
         with open(FIXTURES / 'stories.csv', 'rb') as stories:
             get.side_effect = (cases.read(), stories.read())
 
-    table = Data().table
-    assert len(table) == 8
-    table[0]['data'] == date(2018, 10, 8)
-    table[-1]['data'] == date(2018, 10, 3)
+    cases = Data().cases
+    assert len(cases) == 8
+    cases[0].when == date(2018, 10, 8)
+    cases[-1].when == date(2018, 10, 3)

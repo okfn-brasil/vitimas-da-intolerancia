@@ -3,38 +3,51 @@ from unittest.mock import PropertyMock
 
 from violence import app
 from violence.data import Data
+from violence.models import Case, Story
 
 
-TABLE = (
-    {
-        'data': date(2018, 10, 7),
-        'stories': (
-            {
-                'url': 'https://foo.bar/',
-                'titulo': 'Foo Bar',
-                'imagem_ou_video': 'https://imgs.foo.bar/avatar.png'
-            },
-        )
-    },
+STORY = Story(
+    url='https://florianopol.is/',
+    source='DC',
+    title='Foo Bar',
+    image_or_video='https://florianopol.is/cover.png',
+    summary='Foo, bar!',
+    case_id=42,
 )
+CASE = Case(
+    id=42,
+    when=date(2018, 10, 7),
+    state='SC',
+    city='Florianópolis',
+    tags=['homicídio', 'mulher'],
+    stories=[STORY],
+)
+CASES = [CASE]
 
 
 def test_home_status(mocker):
-    table = mocker.patch.object(Data, 'table', new_callable=PropertyMock)
-    table.return_value = TABLE
+    cases = mocker.patch.object(Data, 'cases', new_callable=PropertyMock)
+    cases.return_value = CASES
     _, response = app.test_client.get('/')
     assert response.status == 200
 
 
 def test_home_contents(mocker):
-    table = mocker.patch.object(Data, 'table', new_callable=PropertyMock)
-    table.return_value = TABLE
+    cases = mocker.patch.object(Data, 'cases', new_callable=PropertyMock)
+    cases.return_value = CASES
     _, response = app.test_client.get('/')
     expected_terms = (
         '07/10/2018',
+        'https://florianopol.is/',
+        # TODO 'DC',
         'Foo Bar',
-        'https://foo.bar/',
-        'https://imgs.foo.bar/avatar.png',
+        'https://florianopol.is/cover.png',
+        'Foo, bar!',
+        '07/10/2018',
+        # TODO 'SC',
+        # TODO 'Florianópolis',
+        # TODO 'homicídio',
+        # TODO 'mulher',
     )
     for expected in expected_terms:
         assert expected in response.text
