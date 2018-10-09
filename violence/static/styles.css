@@ -1,0 +1,82 @@
+/**********************/
+/* specific styles    */
+/**********************/
+
+/* general */
+* { font-family: 'Roboto Slab', serif; box-sizing: border-box }
+html, body, h1, h2, h3, h4, h5, p, ul, li { margin: 0; padding: 0; font-size: 1rem }
+li { list-style-type: none }
+p, li { line-height: 1.68 }
+.container { max-width: 1024px; margin: 0 auto }
+header, main, footer { padding: 3rem 0 }
+h1 { font-size: 261% }
+h2 { font-size: 168% }
+h3 { font-weight: 300; margin-bottom: 1rem }
+h4 { margin-bottom: .5rem }
+
+/* header */
+header h1 { margin-bottom: 3rem }
+header p { font-size: 132% }
+
+/* case */
+main { padding-bottom: 6rem }
+main .case { display: flex; flex-flow: row wrap; margin-top: 6rem }
+main .case:first-child { margin-top: 3rem }
+
+main .case .image { width: 32% }
+main .case .image img { width: 100% }
+main .case .content { width : 68% }
+main .case .extra { width : 100%; padding: 1rem }
+
+main .case .content p, main .case .content h2, main .case .content h3 { padding-left: 1rem }
+
+main .case .content .meta { display: flex; justify-content: flex-end }
+main .case .content .meta .source { flex-basis: 100%; text-align: right }
+main .case .content .meta .source, main .case .content .meta .tag { padding: .5rem 1rem }
+main .case .content .meta .tag { color: white; flex-basis: auto }
+main .case .content .meta .tag.red { background-color: #b03060 }
+main .case .content .meta .tag.orange { background-color: #fe9a76 }
+main .case .content .meta .tag.yellow { background-color: #ffd700 }
+main .case .content .meta .tag.olive { background-color: #32cd32 }
+main .case .content .meta .tag.green { background-color: #016936 }
+main .case .content .meta .tag.teal { background-color: #008080 }
+main .case .content .meta .tag.blue { background-color: #0e6eb8 }
+main .case .content .meta .tag.violet { background-color: #ee82ee }
+main .case .content .meta .tag.purple { background-color: #b413ec }
+main .case .content .meta .tag.pink { background-color: #ff1493 }
+main .case .content .meta .tag.brown { background-color: #a52a2a }
+main .case .content .meta .tag.grey { background-color: #a0a0a0 }
+main .case .content .meta .tag.black { background-color: #000000 }
+main .case .content .meta .tag:last-child { border-top-right-radius: .5rem }
+
+main .case .extra .source { opacity: .68 }
+main .case .extra .source:before { content: ' | ' }
+
+/* footer */
+footer img { width: 23% }
+
+/**********************/
+/* functional classes */
+/**********************/
+
+/* border radius */
+.rounded-bottom { border-bottom-left-radius: .5rem; border-bottom-right-radius: .5rem}
+.rounded-top-left { border-top-left-radius: .5rem }
+
+/* bg color */
+.black-bg { background-color: black }
+.gray-bg { background-color: #999 }
+
+/* text color */
+.gray-text { color: #666 }
+.white-text { color: white }
+
+/* link color */
+.black-link a { color: black }
+.white-link a { color: white }
+
+/* link decoration */
+.no-underline { text-decoration: none }
+
+/* text alignment */
+.centered { text-align: center }

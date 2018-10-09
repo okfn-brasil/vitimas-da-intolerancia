@@ -1,103 +1,92 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>#ViolênciaNãoTemPartido</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"/>
-    <style type="text/css">
-      .ui.container { margin-top: 3rem }
-      .ui.card > .content > .header:not(.ui), .ui.cards > .card > .content > .header:not(.ui),
-      .tags,
-      .description {
-        margin-top: 1rem
-      }
-      .sources { clear: both; margin-top: 4rem }
-      p.ui.center.aligned { text-align: center }
-    </style>
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,700" rel="stylesheet"> 
+    <link rel="stylesheet" href="/static/styles.css">
   </head>
+
   <body>
 
-    <div class="ui container">
-      <h1 class="ui center aligned header">#ViolênciaNãoTemPartido</h1>
-      <p class="ui center aligned">
-        Conheça as vítimas de ódio político, que, ao contrário do que muitos
-        acreditam, não partem de um só lado. Agressões morais, físicas e
-        homicídios – a contagem das Eleições 2018 não é só de apuração de
-        votos mas também de vítimas.
-      </p>
-    </div>
+    <header class="centered black-bg white-text white-link">
+      <div class="container">
+        <h1>#ViolênciaNãoTemPartido</h1>
+        <p>
+          Conheça as vítimas de ódio político, que, ao contrário do que muitos
+          acreditam, não partem de um só lado. Agressões morais, físicas e
+          homicídios – a contagem das Eleições 2018 não é só de apuração de
+          votos mas também de vítimas.
+        </p>
+      </div><!-- .container -->
+    </header>
 
-    <div class="ui container cards">
+    <main>
       {% for case in cases %}
-      <div class="ui card">
+      <div class="container case">
 
         <div class="image">
-          <img src="{{ case.main_story.image_or_video }}">
-        </div>
-
-        <div class="content">
-
-          <div class="meta">
-            <div class="ui label right floated">
-              <i class="globe icon"></i>
-              {{ case.city }}, {{ case.state }}
-            </div>
-            <span>{{ case.main_story.source }}</span>
-          </div>
-
-          <a class="header" href="{{ case.main_story.url }}">
-            {{ case.main_story.title }}
+          <a href="{{ case.main_story.url }}">
+            <img class="rounded-top-left" src="{{ case.main_story.image_or_video }}">
           </a>
+        </div><!-- end .image -->
 
-          <div class="extra tags">
+        <div class="content black-link">
+          <div class="meta">
+            <div class="source gray-bg white-text">{{ case.main_story.source }}</div>
             {% for tag, color in case.tags_and_colors %}
-            <div class="ui label {{ color }}">{{ tag }}</div>
+            <div class="tag {{ color }}">{{ tag }}</div>
             {% endfor %}
-          </div>
+          </div><!-- end .meta -->
 
-          <div class="description">
-            <p>{{ case.main_story.summary }}</p>
-            <a class="ui right floated" href="{{ case.main_story.url }}">
-              Matéria completa
-            </a>
-          </div>
+          <h2>
+            <a class="no-underline" href="{{ case.main_story.url }}">{{ case.main_story.title }}</a>
+          </h2>
 
-          {% if case.stories|length > 1 %}
-          <div class="extra sources">
-            <div class="header">
-              <i class="newspaper outline icon"></i>
-              {% if case.stories|length == 2 %}
-              Outra fonte:
-              {% else %}
-              Outras {{ case.stories|length - 1 }} fontes:
-              {% endif %}
-            </div><!-- header -->
-
-            <div class="ui link list">
-              {% for story in case.stories %}
-              {% if not loop.first %}
-              <a href="{{ story.url }}">
-                <p>
-                  <span class="meta">{{ story.source }}</span><br>
-                  {{ story.title }}<br>
-                  &nbsp;
-                </p>
-              </a>
-              {% endif %}
-              {% endfor %}
-            </div><!-- end .list -->
-
-          </div><!-- end .extra -->
-          {% endif %}
+          <h3 class="gray-text">
+            {{ case.city }}, {{ case.state }} &mdash; {{ case.when.strftime('%d/%m/%Y') }}
+          </h3>
+          <p>{{ case.main_story.summary }}</p>
 
         </div><!-- end .content -->
-      </div><!-- end .card -->
 
+        <div class="extra gray-bg white-text white-link rounded-bottom">
+          {% if case.stories|length > 1 %}
+          <h4>
+            {% if case.stories|length == 2 %}
+            Outra matéria
+            {% else %}
+            Outras matérias
+            {% endif %}
+            sobre o mesmo caso:
+          </h4>
+          <ul>
+            {% for story in case.stories %}
+            {% if not loop.first %}
+            <li>
+              <a class="no-underline" href="{{ story.url }}">
+                {{ story.title }}
+                <span class="source">{{ story.source }}</span>
+              </a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div><!-- end .extra -->
+      </div><!-- end .case -->
       {% endfor %}
-    </div><!-- end .cards -->
+    </main>
+
+    <footer class="centered black-bg white-text white-link">
+      <p><img src="/static/okbr.png" alt="Open Knowledge Brasil"></p>
+      <a class="no-underline" href="https://github.com/okfn-brasil/violencia-nao-tem-partido/">
+        Feito com código aberto
+      </a>
+    </footer>
 
   </body>
 </html>
