@@ -6,7 +6,7 @@ HOST = config('HOST', default='0.0.0.0')
 PORT = config('PORT', default='8000', cast=int)
 
 REDIS_URL = config('REDIS_URL', default='redis://localhost:6379/')
-REDIS_DB = config('REDIS_DB', default='0', cast=int)
+REDIS_DB = config('REDIS_DB', default='0', cast=lambda x: int(x) * 3600)
 CACHE_DATA_FOR = 3  # in hours
 REFRESH_CACHE_ON_LOAD = config('REFRESH_CACHE_ON_LOAD', default=False, cast=bool)
 

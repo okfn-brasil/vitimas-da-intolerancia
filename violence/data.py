@@ -1,7 +1,8 @@
+import asyncio
 import pickle
 from io import BytesIO
 
-import requests
+import aiohttp
 from redis import StrictRedis
 from rows import import_from_csv
 
@@ -23,8 +24,37 @@ class Data:
     def __init__(self, refresh_cache=False):
         self.cache_key = 'cases'
         self.cache = StrictRedis.from_url(REDIS_URL, db=REDIS_DB)
+        self.urls = {
+            'cases': BASE_SPREADSHEET_URL + CASES_SPREADSHEET_GID,
+            'stories': BASE_SPREADSHEET_URL + STORIES_SPREADSHEET_GID
+        }
+
         if refresh_cache:
             self.reload_from_google_spreadsheet()
+
+    async def fetch(self, session, name):
+        async with session.get(self.urls[name]) as response:
+            contents = await response.read()
+            self.cache.set(f'response-{name}', contents, CACHE_DATA_FOR)
+
+    async def _get_spreadsheets(self, loop):
+        names = self.urls.keys()
+        async with aiohttp.ClientSession(loop=loop) as session:
+            requests = tuple(self.fetch(session, name) for name in names)
+            await asyncio.gather(*requests)
+
+    def get_spreadsheets(self):
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(self._get_spreadsheets(loop))
+
+    def get_spreadsheet(self, name):
+        key = f'response-{name}'
+        cached = self.cache.get(key)
+        if cached:
+            return cached
+
+        self.get_spreadsheets()  # cache responses
+        return self.get_spreadsheet(name)
 
     @property
     def cases(self):
@@ -34,15 +64,7 @@ class Data:
 
         return self.reload_from_google_spreadsheet()
 
-    def get(self, csv_label):
-        switch = {
-            'cases': CASES_SPREADSHEET_GID,
-            'stories': STORIES_SPREADSHEET_GID
-        }
-        return requests.get(BASE_SPREADSHEET_URL + switch[csv_label]).content
-
-    @staticmethod
-    def serialize_cases(buffer):
+    def serialize_cases(self, buffer):
         for case in import_from_csv(buffer):
             case = case._asdict()
             data = {
@@ -58,11 +80,12 @@ class Data:
             ]
 
             case = Case(**data)
-            if case.when:
-                yield case
+            if not case.is_valid():
+                continue
 
-    @staticmethod
-    def append_stories(buffer, cases):
+            yield case
+
+    def append_stories(self, buffer, cases):
         for story in import_from_csv(buffer):
             story = story._asdict()
             data = {
@@ -83,14 +106,14 @@ class Data:
         return cases
 
     def reload_from_google_spreadsheet(self):
-        with BytesIO(self.get('cases')) as buffer:
+        with BytesIO(self.get_spreadsheet('cases')) as buffer:
             cases = sorted(
                 self.serialize_cases(buffer),
                 key=lambda case: case.when,
                 reverse=True
             )
 
-        with BytesIO(self.get('stories')) as buffer:
+        with BytesIO(self.get_spreadsheet('stories')) as buffer:
             cases = self.append_stories(buffer, cases)
 
         cleaned_cases = tuple(case for case in cases if case.stories)

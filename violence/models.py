@@ -44,3 +44,9 @@ class Case:
             (tag, TAG_COLORS.get(tag))
             for tag in self.tags
         )
+
+    def is_valid(self):
+        if not self.when:
+            return False
+
+        return True
