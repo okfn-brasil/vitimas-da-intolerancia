@@ -54,7 +54,7 @@ class Data:
             data['tags'] = data.get('tags') or ''  # avoids getting None
             data['tags'] = [
                 tag.strip().lower()
-                for tag in data.get('tags').split('|')
+                for tag in data.get('tags').split('|') if tag
             ]
 
             case = Case(**data)

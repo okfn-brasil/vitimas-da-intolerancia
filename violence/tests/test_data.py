@@ -1,4 +1,5 @@
 from datetime import date
+from itertools import cycle
 from pathlib import Path
 
 from violence.data import Data
@@ -18,9 +19,10 @@ def test_data_cases_property(mocker):
     get = mocker.patch.object(Data, 'get')
     with open(FIXTURES / 'cases.csv', 'rb') as cases:
         with open(FIXTURES / 'stories.csv', 'rb') as stories:
-            get.side_effect = (cases.read(), stories.read())
+            get.side_effect = cycle((cases.read(), stories.read()))
 
-    cases = Data().cases
-    assert len(cases) == 6
-    cases[0].when == date(2018, 10, 8)
-    cases[-1].when == date(2018, 10, 3)
+    data = Data()
+    data.reload_from_google_spreadsheet()
+    assert len(data.cases) == 5
+    data.cases[0].when == date(2018, 10, 8)
+    data.cases[-1].when == date(2018, 10, 3)

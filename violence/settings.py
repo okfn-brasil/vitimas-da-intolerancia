@@ -8,6 +8,7 @@ PORT = config('PORT', default='8000', cast=int)
 REDIS_URL = config('REDIS_URL', default='redis://localhost:6379/')
 REDIS_DB = config('REDIS_DB', default='0', cast=int)
 CACHE_DATA_FOR = 3  # in hours
+REFRESH_CACHE_ON_LOAD = config('REFRESH_CACHE_ON_LOAD', default=False, cast=bool)
 
 SPREADSHEET_ID = config('SPREADSHEET_ID')
 CASES_SPREADSHEET_GID = config('CASES_SPREADSHEET_GID')
