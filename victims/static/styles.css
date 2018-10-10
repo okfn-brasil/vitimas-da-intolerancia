@@ -54,11 +54,14 @@ main .case .extra .source:before { content: ' | ' }
 
 /* footer */
 footer .container { display: flex; padding-bottom: 3rem }
-footer .links, footer .credits { flex-basis: 50% }
+footer .links { flex-basis: 32% }
+footer .credits { flex-basis: 68%; }
+footer .credits nav { display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap }
 footer .links p, footer .credits p { font-weight: 700 }
 footer .links a { display: block; margin-top: .5rem }
-footer a img { width: 33%; margin: 1.5rem }
+footer a { margin: 3rem 1.5rem }
 footer a:last-child img { margin-right: 0 }
+footer a img { width: 100% }
 
 /**********************/
 /* functional classes */
