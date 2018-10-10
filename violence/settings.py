@@ -2,7 +2,7 @@ from pathlib import Path
 
 from decouple import config
 
-TITLE = '#ViolênciaNãoTemPartido'
+TITLE = '#VítimasDaIntolerância'
 
 DEBUG = config('DEBUG', default='False', cast=bool)
 HOST = config('HOST', default='0.0.0.0')

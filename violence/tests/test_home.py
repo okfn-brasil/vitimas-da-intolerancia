@@ -37,7 +37,7 @@ def test_home_contents(mocker):
     cases.return_value = CASES
     _, response = app.test_client.get('/')
     expected_terms = (
-        '#ViolênciaNãoTemPartido',
+        '#VítimasDaIntolerância',
         'https://florianopol.is/',
         'DC',
         'Foo Bar',

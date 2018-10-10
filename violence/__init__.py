@@ -16,7 +16,7 @@ from violence.settings import (
 )
 
 
-app = Sanic('violencia_nao_tem_partido')
+app = Sanic('vitimas_da_intolerancia')
 app.static('/static', str(STATIC_DIR))
 Compress(app)
 

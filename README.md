@@ -1,4 +1,4 @@
-# #ViolênciaNãoTemPartido
+# #VítimasDaIntolerância
 
 Hate crimes monitor for political motivated assaults in Brazil.
 
