@@ -15,7 +15,7 @@ class Story:
     case_id: int
 
     def is_valid(self):
-        skip_sources = {'twitter', 'facebook'}
+        skip_sources = {"twitter", "facebook"}
         if self.source.lower() in skip_sources:
             return False
 
@@ -43,10 +43,7 @@ class Case:
 
     @property
     def tags_and_colors(self):
-        return (
-            (tag, TAG_COLORS.get(tag))
-            for tag in self.tags
-        )
+        return ((tag, TAG_COLORS.get(tag)) for tag in self.tags)
 
     def is_valid(self):
         return bool(self.when)

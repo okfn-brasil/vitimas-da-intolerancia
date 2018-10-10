@@ -26,10 +26,20 @@ Spin up the server with:
 $ python run.py
 ```
 
+## Contributing
+
+Make yourself at home, write tests and format code with
+[Black](https://github.com/ambv/black):
+
+```sh
+$ black .
+```
+
 ## Tests
 
 Run tests with:
 
 ```sh
 $ pytest
+$ black . --check
 ```
