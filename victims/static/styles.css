@@ -54,18 +54,24 @@ main .case .extra .source:before { content: ' | ' }
 
 /* footer */
 footer .container { display: flex; padding-bottom: 3rem }
+
 footer .links { flex-basis: 32% }
-footer .credits { flex-basis: 68%; }
-footer .credits nav { display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap }
 footer .links p, footer .credits p { font-weight: 700 }
 footer .links a { display: block; margin-top: .5rem }
-footer a { margin: 3rem 1.5rem }
-footer a:last-child img { margin-right: 0 }
-footer a img { width: 100% }
+
+footer .credits { flex-basis: 68%; }
+footer .credits nav { display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap }
+footer .credits a { margin: 3rem 1.5rem }
+footer .credits a:last-child img { margin-right: 0 }
+footer .credits a img { width: 100% }
 
 /**********************/
 /* functional classes */
 /**********************/
+
+/* buttons */
+.button { border-radius: 2rem; padding: 1rem 2rem }
+.button.big { font-size: 162%; font-weight: 700 }
 
 /* border radius */
 .rounded-bottom { border-bottom-left-radius: .5rem; border-bottom-right-radius: .5rem}
