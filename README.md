@@ -1,3 +1,7 @@
+[![Travis CI](https://img.shields.io/travis/okfn-brasil/vitimas-da-intolerancia.svg)](https://travis-ci.org/okfn-brasil/vitimas-da-intolerancia)
+[![Codecov](https://img.shields.io/codecov/c/github/okfn-brasil/vitimas-da-intolerancia.svg)](https://codecov.io/gh/okfn-brasil/vitimas-da-intolerancia)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/okfn-brasil/vitimas-da-intolerancia.svg)](https://codeclimate.com/github/okfn-brasil/vitimas-da-intolerancia)
+
 # #VítimasDaIntolerância
 
 Hate crimes monitor for political motivated assaults in Brazil.
