@@ -67,6 +67,10 @@ footer a img { width: 100% }
 /* functional classes */
 /**********************/
 
+/* buttons */
+.button { border-radius: 2rem; padding: 1rem 2rem }
+.button.big { font-size: 162%; font-weight: 700 }
+
 /* border radius */
 .rounded-bottom { border-bottom-left-radius: .5rem; border-bottom-right-radius: .5rem}
 .rounded-top-left { border-top-left-radius: .5rem }
