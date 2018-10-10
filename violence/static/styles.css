@@ -53,7 +53,12 @@ main .case .extra .source { opacity: .68 }
 main .case .extra .source:before { content: ' | ' }
 
 /* footer */
-footer img { width: 23% }
+footer .container { display: flex; padding-bottom: 3rem }
+footer .links, footer .credits { flex-basis: 50% }
+footer .links p, footer .credits p { font-weight: 700 }
+footer .links a { display: block; margin-top: .5rem }
+footer a img { width: 33%; margin: 1.5rem }
+footer a:last-child img { margin-right: 0 }
 
 /**********************/
 /* functional classes */
@@ -80,3 +85,4 @@ footer img { width: 23% }
 
 /* text alignment */
 .centered { text-align: center }
+.right { text-align: right }
