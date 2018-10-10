@@ -19,6 +19,9 @@ class Story:
         if self.source.lower() in skip_sources:
             return False
 
+        if not self.title:
+            return False
+
         if not self.image_or_video:
             return False
 
