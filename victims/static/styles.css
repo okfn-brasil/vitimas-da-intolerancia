@@ -18,6 +18,9 @@ h4 { margin-bottom: .5rem }
 header h1 { margin-bottom: 3rem }
 header p { font-size: 132% }
 
+/* about */
+main .about h2 { margin: 3rem 0 }
+
 /* case */
 main { padding-bottom: 6rem }
 main .case { display: flex; flex-flow: row wrap; margin-top: 6rem }
