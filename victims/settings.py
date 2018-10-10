@@ -53,6 +53,6 @@ TAG_COLORS = {
     "mulher": "purple",
     "homofobia": "pink",
     "jornalista": "brown",
-    "": "grey",
+    "": "gray",  # used as default color
     "": "black",
 }
