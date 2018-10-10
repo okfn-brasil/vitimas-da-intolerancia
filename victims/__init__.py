@@ -43,3 +43,10 @@ caches.set_config(
 @jinja.template("index.html")
 async def home(request):
     return {"cases": app_data.cases, "title": TITLE}
+
+
+@cached(key='map')
+@app.route('/map')
+@jinja.template('map.html')
+async def map(request):
+    return {'cases': app_data.cases, 'title': TITLE}

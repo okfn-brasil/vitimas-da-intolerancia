@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>{{ title }}</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,700" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,700" rel="stylesheet">
     <link rel="stylesheet" href="/static/styles.css">
+    {% block extra_styles %}{% endblock %}
   </head>
 
   <body>
@@ -25,6 +26,14 @@
     </header>
 
     <main>
+      {% block content %}
+      <p class="centered white-link">
+        &nbsp;<br>
+        <a class="big button no-underline black-bg" href="{{ url_for('map') }}">
+            Veja um mapa interativo com os casos já registrados
+        </a>
+      </p>
+
       {% for case in cases %}
       <div class="container case">
 
@@ -90,6 +99,7 @@
         </a>
       </p>
 
+      {% endblock %}
     </main>
 
     <footer class=" black-bg white-text white-link">
@@ -131,13 +141,14 @@
     </footer>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src=“https://www.googletagmanager.com/gtag/js?id=UA-127226524-1“></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127226524-1"></script>
     <script>
      window.dataLayer = window.dataLayer || [];
      function gtag(){dataLayer.push(arguments);}
-     gtag(‘js’, new Date());
-     gtag(‘config’, ‘UA-127226524-1’);
+     gtag('js', new Date());
+     gtag('config', 'UA-127226524-1');
     </script>
 
+    {% block scripts %}{% endblock %}
   </body>
 </html>
