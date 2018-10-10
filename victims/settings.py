@@ -54,5 +54,5 @@ TAG_COLORS = {
     "homofobia": "pink",
     "jornalista": "brown",
     "": "gray",  # used as default color
-    "": "black",
+    "vandalismo": "black",
 }
