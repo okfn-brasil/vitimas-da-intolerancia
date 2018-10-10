@@ -6,8 +6,8 @@ import aiohttp
 from redis import StrictRedis
 from rows import import_from_csv
 
-from violence.models import Case, Story
-from violence.settings import (
+from victims.models import Case, Story
+from victims.settings import (
     BASE_SPREADSHEET_URL,
     CACHE_DATA_FOR,
     CASES_SPREADSHEET_GID,

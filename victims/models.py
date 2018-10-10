@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import date
 from typing import List
 
-from violence.settings import TAG_COLORS
+from victims.settings import TAG_COLORS
 
 
 @dataclass

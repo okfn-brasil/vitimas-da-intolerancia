@@ -7,7 +7,7 @@ TITLE = '#VítimasDaIntolerância'
 DEBUG = config('DEBUG', default='False', cast=bool)
 HOST = config('HOST', default='0.0.0.0')
 PORT = config('PORT', default='8000', cast=int)
-STATIC_DIR = Path() / 'violence' / 'static'
+STATIC_DIR = Path() / 'victims' / 'static'
 
 REDIS_URL = config('REDIS_URL', default='redis://localhost:6379/')
 REDIS_DB = config('REDIS_DB', default='0', cast=lambda x: int(x) * 3600)

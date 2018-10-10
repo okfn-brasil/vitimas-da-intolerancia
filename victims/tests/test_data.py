@@ -3,12 +3,12 @@ from pathlib import Path
 
 import pytest
 
-from violence.data import Data
+from victims.data import Data
 
 
 FIXTURES = {
-    'cases': Path() / 'violence' / 'tests' / 'fixtures' / 'cases.csv',
-    'stories': Path() / 'violence' / 'tests' / 'fixtures' / 'stories.csv'
+    'cases': Path() / 'victims' / 'tests' / 'fixtures' / 'cases.csv',
+    'stories': Path() / 'victims' / 'tests' / 'fixtures' / 'stories.csv'
 }
 
 

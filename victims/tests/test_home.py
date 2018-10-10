@@ -1,9 +1,9 @@
 from datetime import date
 from unittest.mock import PropertyMock
 
-from violence import app
-from violence.data import Data
-from violence.models import Case, Story
+from victims import app
+from victims.data import Data
+from victims.models import Case, Story
 
 
 STORY = Story(

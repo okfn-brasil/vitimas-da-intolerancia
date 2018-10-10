@@ -9,7 +9,7 @@ Requires a Google account, Python 3.7 and Redis.
 1. Install the dependencies with `pip install -r requirements.txt`
 1. Create a [Google Sheets](https://docs.google.com/spreadsheets/) file
 1. Create two spreadsheets (tabs) in this file
-1. Use the files from [`tests/fixtures`](violence/tests/fixtures/) to fill in
+1. Use the files from [`tests/fixtures`](victims/tests/fixtures/) to fill in
    these spreadsheets
 1. Then copy `.env.sample` as `.env` and setup Redis access and the Google
    Sheets data

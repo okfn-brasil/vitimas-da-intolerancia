@@ -5,8 +5,8 @@ from sanic import Sanic
 from sanic_compress import Compress
 from sanic_jinja2 import SanicJinja2
 
-from violence.data import Data
-from violence.settings import (
+from victims.data import Data
+from victims.settings import (
     CACHE_DATA_FOR,
     REDIS_DB,
     REDIS_URL,
@@ -20,7 +20,7 @@ app = Sanic('vitimas_da_intolerancia')
 app.static('/static', str(STATIC_DIR))
 Compress(app)
 
-jinja = SanicJinja2(app, pkg_name='violence')
+jinja = SanicJinja2(app, pkg_name='victims')
 app_data = Data(refresh_cache=REFRESH_CACHE_ON_LOAD)
 redis = urlparse(REDIS_URL)
 caches.set_config({
