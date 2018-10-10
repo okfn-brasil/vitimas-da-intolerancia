@@ -30,6 +30,12 @@ Spin up the server with:
 $ python run.py
 ```
 
+If you wanna clear the cache:
+
+```sh
+$ python clear_cache.py
+```
+
 ## Contributing
 
 Make yourself at home, write tests and format code with
