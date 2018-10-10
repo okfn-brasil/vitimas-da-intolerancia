@@ -46,7 +46,7 @@ TAG_COLORS = {
     "agressão": "orange",
     "xenofobia": "yellow",
     "prisão": "olive",
-    "": "green",
+    "crime ambiental": "green",
     "ameaça": "teal",
     "": "blue",
     "": "violet",
