@@ -57,9 +57,9 @@ main .case .extra .source:before { content: ' | ' }
 
 /* footer */
 footer .container { display: flex; padding-bottom: 3rem }
+footer .links p, footer .credits p { font-weight: 700 }
 
 footer .links { flex-basis: 32% }
-footer .links p, footer .credits p { font-weight: 700 }
 footer .links a { display: block; margin-top: .5rem }
 
 footer .credits { flex-basis: 68%; }
@@ -94,6 +94,7 @@ footer .credits a img { width: 100% }
 
 /* link decoration */
 .no-underline { text-decoration: none }
+.underline-hover:hover { text-decoration: underline }
 
 /* text alignment */
 .centered { text-align: center }
