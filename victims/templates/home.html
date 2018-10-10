@@ -15,7 +15,7 @@
 
   <div class="content black-link">
     <div class="meta">
-      <div class="source gray-bg white-text">{{ case.main_story.source }}</div>
+      <div class="source grey-bg white-text">{{ case.main_story.source }}</div>
       {% for tag, color in case.tags_and_colors %}
       <div class="tag {{ color }}">{{ tag }}</div>
       {% endfor %}
@@ -25,14 +25,14 @@
       <a class="no-underline" href="{{ case.main_story.url }}">{{ case.main_story.title }}</a>
     </h2>
 
-    <h3 class="gray-text">
+    <h3 class="grey-text">
       {{ case.city }}, {{ case.state }} &mdash; {{ case.when.strftime('%d/%m/%Y') }}
     </h3>
     <p>{{ case.main_story.summary }}</p>
 
   </div><!-- end .content -->
 
-  <div class="extra gray-bg white-text white-link rounded-bottom">
+  <div class="extra grey-bg white-text white-link rounded-bottom">
     {% if case.stories|length > 1 %}
     <h4>
       {% if case.stories|length == 2 %}

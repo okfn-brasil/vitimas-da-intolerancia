@@ -50,7 +50,7 @@ def test_home_contents(mocker):
         "mulher",
         "purple",
         "tag que não existe",
-        "gray",
+        "grey",
     )
     for expected in expected_terms:
         assert expected in response.text

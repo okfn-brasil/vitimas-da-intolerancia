@@ -48,7 +48,7 @@ main .case .content .meta .tag.violet { background-color: #ee82ee }
 main .case .content .meta .tag.purple { background-color: #b413ec }
 main .case .content .meta .tag.pink { background-color: #ff1493 }
 main .case .content .meta .tag.brown { background-color: #a52a2a }
-main .case .content .meta .tag.gray { background-color: #a0a0a0 }
+main .case .content .meta .tag.grey { background-color: #a0a0a0 }
 main .case .content .meta .tag.black { background-color: #000000 }
 main .case .content .meta .tag:last-child { border-top-right-radius: .5rem }
 
@@ -82,10 +82,10 @@ footer .credits a img { width: 100% }
 
 /* bg color */
 .black-bg { background-color: black }
-.gray-bg { background-color: #999 }
+.grey-bg { background-color: #999 }
 
 /* text color */
-.gray-text { color: #666 }
+.grey-text { color: #666 }
 .white-text { color: white }
 
 /* link color */
