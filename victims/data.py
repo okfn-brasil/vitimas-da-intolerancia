@@ -2,6 +2,7 @@ import asyncio
 import pickle
 from io import BytesIO
 from itertools import cycle, groupby, islice
+from random import shuffle
 
 import aiohttp
 from redis import StrictRedis
@@ -75,9 +76,9 @@ class Data:
     def cases(self):
         cached = self.cache.get(self.cache_key)
         if cached:
-            return pickle.loads(cached)
+            return self.shuffle_cases(pickle.loads(cached))
 
-        return self.reload_from_google_spreadsheet()
+        return self.shuffle_cases(self.reload_from_google_spreadsheet())
 
     def serialize_cases(self, buffer):
         for case in import_from_csv(buffer):
@@ -98,6 +99,12 @@ class Data:
                 continue
 
             yield case
+
+    def shuffle_cases(self, cases):
+        for case in cases:
+            shuffle(case.stories)
+
+        return cases
 
     def append_stories(self, buffer, cases):
         for story in import_from_csv(buffer):
