@@ -1,13 +1,15 @@
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 
 from aiocache import cached, caches
 from sanic import Sanic
+from sanic.response import redirect
 from sanic_compress import Compress
 from sanic_jinja2 import SanicJinja2
 
 from victims.data import Data
 from victims.settings import (
     CACHE_DATA_FOR,
+    DEBUG,
     REDIS_DB,
     REDIS_URL,
     REFRESH_CACHE_ON_LOAD,
@@ -36,6 +38,20 @@ caches.set_config(
         }
     }
 )
+
+
+@app.middleware("request")
+def force_https(request):
+    if DEBUG:
+        return None
+
+    host = request.headers.get("Host", "")
+    protocol = "https" if request.transport.get_extra_info("sslcontext") else "http"
+
+    if request.headers.get("x-forwarded-proto", protocol) == "http":
+        args = ("https", host, request.path, None, request.query_string, None)
+        url = urlunparse(args)
+        return redirect(url)
 
 
 @cached(key="home")
