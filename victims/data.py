@@ -1,6 +1,7 @@
 import asyncio
 import pickle
 from io import BytesIO
+from itertools import cycle, groupby, islice
 
 import aiohttp
 from redis import StrictRedis
@@ -17,6 +18,21 @@ from victims.settings import (
     STORIES_SPREADSHEET_GID,
     STORY_LABELS,
 )
+
+
+def roundrobin(*iterables):
+    "roundrobin('ABC', 'D', 'EF') --> A D E B F C"
+    # Recipe credited to George Sakkis
+    num_active = len(iterables)
+    nexts = cycle(iter(it).__next__ for it in iterables)
+    while num_active:
+        try:
+            for next in nexts:
+                yield next()
+        except StopIteration:
+            # Remove the iterator we just exhausted from the cycle.
+            num_active -= 1
+            nexts = cycle(islice(nexts, num_active))
 
 
 class Data:
@@ -67,7 +83,8 @@ class Data:
         for case in import_from_csv(buffer):
             case = case._asdict()
             data = {
-                new_label: case.get(old_label) for old_label, new_label in CASE_LABELS
+                new_label: case.get(old_label)
+                for old_label, new_label in CASE_LABELS
             }
 
             data["stories"] = data.get("stories") or []  # avoids getting None
@@ -102,10 +119,17 @@ class Data:
         return cases
 
     def reload_from_google_spreadsheet(self):
+        aggressor_getter = lambda case: case.aggressor_side
+        when_getter = lambda case: case.when
+
         with BytesIO(self.get_spreadsheet("cases")) as buffer:
+            # Ordering cases: first by when, then round robin aggressor_side
             cases = sorted(
-                self.serialize_cases(buffer), key=lambda case: case.when, reverse=True
+                self.serialize_cases(buffer), key=aggressor_getter, reverse=True
             )
+            groups = groupby(cases, key=aggressor_getter)
+            iterators = [sorted(group, key=when_getter) for _, group in groups]
+            cases = list(roundrobin(*iterators))
 
         with BytesIO(self.get_spreadsheet("stories")) as buffer:
             cases = self.append_stories(buffer, cases)
