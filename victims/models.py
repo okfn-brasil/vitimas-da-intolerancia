@@ -31,6 +31,7 @@ class Story:
 @dataclass
 class Case:
     id: int
+    aggressor_side: str
     when: date
     state: str
     city: str

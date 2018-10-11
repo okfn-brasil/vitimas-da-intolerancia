@@ -42,11 +42,11 @@ caches.set_config(
 @app.route("/")
 @jinja.template("home.html")
 async def home(request):
-    return {"cases": app_data.cases, "title": TITLE}
+    return {"cases": app_data.cases, "title": TITLE, "url_path": "/"}
 
 
 @cached(key="about")
 @app.route("/about.html")
 @jinja.template("about.html")
 async def about(request):
-    return {"title": TITLE}
+    return {"title": TITLE, "url_path": "/about.html"}

@@ -86,13 +86,15 @@ footer .links a { display: block; margin-top: .5rem }
 footer .credits { flex-basis: 68%; }
 footer .credits nav { display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap }
 footer .credits a { margin: 3rem 1.5rem }
-footer .credits a:last-child img { margin-right: 0 }
+footer .credits a:last-child { margin-right: 0 }
 footer .credits a img { width: 100% }
 
 @media only screen and (max-width: 768px) {
   footer .container { flex-wrap: wrap }
   footer .links { flex-basis: 100% }
   footer .credits { margin-top: 20px; flex-basis: 100% }
+  footer .credits a { margin: 1.5rem 1rem }
+  footer .credits a:first-child { margin-left: 0 }
 }
 
 /**********************/
