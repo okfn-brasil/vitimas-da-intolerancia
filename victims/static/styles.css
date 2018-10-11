@@ -4,7 +4,7 @@
 
 /* general */
 * { font-family: 'Roboto Slab', serif; box-sizing: border-box }
-html, body, h1, h2, h3, h4, h5, p, ul, li { margin: 0; padding: 0; font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1024 - 320)))}
+html, body, h1, h2, h3, h4, h5, p, ol, ul, li { margin: 0; padding: 0; font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1024 - 320)))}
 
 li { list-style-type: none }
 p, li { line-height: 1.68; font-size: 0.8rem }
@@ -20,6 +20,7 @@ h4 { margin-bottom: .5rem }
 
 /* header */
 header h1 { margin-bottom: 3rem }
+header p { margin-bottom: 1rem }
 
 @media only screen and (max-width: 768px) {
   header h1 { margin-bottom: 1rem; font-size: 2rem }
@@ -28,6 +29,8 @@ header h1 { margin-bottom: 3rem }
 
 /* about */
 main .about h2 { margin: 3rem 0 }
+main .about li { list-style-type: disc; list-style-position: inside }
+main .about p, main .about ol { margin-top: 1.5rem }
 
 /* case */
 main { padding-bottom: 6rem }
