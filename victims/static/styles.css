@@ -4,30 +4,25 @@
 
 /* general */
 * { font-family: 'Roboto Slab', serif; box-sizing: border-box }
-html, body, h1, h2, h3, h4, h5, p, ul, li { margin: 0; padding: 0; font-size: 1rem }
-li { list-style-type: none }
+html, body, h1, h2, h3, h4, h5, p, ul, li { margin: 0; padding: 0; font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1024 - 320)))}
+
+li { list-style-type: none; font-size: 0.8rem }
 p, li { line-height: 1.68 }
 .container { max-width: 1024px; margin: 0 auto; padding: 0 20px }
 header, main, footer { padding: 3rem 0 }
-h1 { font-size: 261% }
-h2 { font-size: 168% }
+h1 { font-size: 2.6rem }
+h2, header p { font-size: 1.2rem }
+h3 { font-size: 0.8rem }
+h4 { font-size: 1rem }
 h3 { font-weight: 300; margin-bottom: 1rem }
 h4 { margin-bottom: .5rem }
 
-@media only screen and (max-width: 768px) {
-  h1 { font-size: calc(23px + (35 - 23) * ((100vw - 320px) / (768 - 320))) }
-  h2 { font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (768 - 320))) }
-  h3, h4 { font-size: calc(13px + (16 - 13) * ((100vw - 320px) / (768 - 320))) }
-  li { font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (768 - 320))) }
-}
-
 /* header */
 header h1 { margin-bottom: 3rem }
-header p { font-size: 132% }
 
 @media only screen and (max-width: 768px) {
-  header h1 { margin-bottom: 1rem }
-  header p { font-size: calc(13px + (17 - 13) * ((100vw - 320px) / (768 - 320))) }
+  header h1 { margin-bottom: 1rem; font-size: 2rem }
+  header p { font-size: 1rem }
 }
 
 /* about */
@@ -68,12 +63,10 @@ main .case .extra .source { opacity: .68 }
 main .case .extra .source:before { content: ' | ' }
 
 @media only screen and (max-width: 768px) {
-  main .case .content p { font-size: calc(13px + (16 - 13) * ((100vw - 320px) / (768 - 320))) }
   main .case .image { float: left; width : 100%; height: 80px;  }
   main .case .image img { border-top-right-radius: .5rem }
   main .case .content { width : 100% }
   main .case .content .meta .tag:last-child { border-top-right-radius: 0 }
-  main .case .content .meta { font-size: calc(8px + (13 - 8) * ((100vw - 320px) / (768 - 320))) }
 }
 
 /* footer */
@@ -103,10 +96,10 @@ footer .credits a img { width: 100% }
 
 /* buttons */
 .button { border-radius: 2rem; padding: 1rem 2rem }
-.button.big { font-size: 162%; font-weight: 700 }
+.button.big { font-size: 1.4rem; font-weight: 700 }
 
 @media only screen and (max-width: 768px) {
-  .button.big { display: block; font-size: 100%; font-weight: 700; margin: 0 20px }
+  .button.big { display: block; font-size: 1rem; font-weight: 700; margin: 0 20px }
 }
 
 /* border radius */
