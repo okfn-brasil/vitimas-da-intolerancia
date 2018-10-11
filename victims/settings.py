@@ -12,14 +12,12 @@ PORT = config("PORT", default="8000", cast=int)
 STATIC_DIR = Path() / "victims" / "static"
 
 REDIS_URL = config("REDIS_URL", default="redis://localhost:6379/")
-REDIS_DB = config("REDIS_DB", default="0", cast=int)
 CACHE = {
     "default": {
         "cache": "aiocache.RedisCache",
         "timeout": config("CACHE_DATA_FOR", default="3", cast=int) * 3600,
         "endpoint": urlparse(REDIS_URL).hostname,
         "port": urlparse(REDIS_URL).port,
-        "db": REDIS_DB,
         "serializer": {"class": "aiocache.serializers.StringSerializer"},
     }
 }
