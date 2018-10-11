@@ -9,7 +9,7 @@
 
   <div class="image">
     <a href="{{ case.main_story.url }}">
-      <img class="rounded-top-left" src="{{ case.main_story.image_or_video }}" alt="Foto da matéria “{{ case.main_story.title }}”">
+      <img class="rounded-top-left" src="{{ case.main_story.image_or_video }}" alt="Foto da matéria “{{ case.main_story.title|e }}”">
     </a>
   </div><!-- end .image -->
 
@@ -22,13 +22,13 @@
     </div><!-- end .meta -->
 
     <h2>
-      <a class="no-underline" href="{{ case.main_story.url }}">{{ case.main_story.title }}</a>
+      <a class="no-underline" href="{{ case.main_story.url }}">{{ case.main_story.title|e }}</a>
     </h2>
 
     <h3 class="grey-text">
       {{ case.city }}, {{ case.state }} &mdash; {{ case.when.strftime('%d/%m/%Y') }}
     </h3>
-    <p>{{ case.main_story.summary }}</p>
+    <p>{{ case.main_story.summary|e }}</p>
 
   </div><!-- end .content -->
 
@@ -47,7 +47,7 @@
       {% if not loop.first %}
       <li>
         <a class="no-underline" href="{{ story.url }}">
-          {{ story.title }}
+          {{ story.title|e }}
           <span class="source">{{ story.source }}</span>
         </a>
       </li>
