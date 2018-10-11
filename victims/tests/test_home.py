@@ -21,7 +21,7 @@ CASE = Case(
     city="Florianópolis",
     tags=["homicídio", "mulher", "tag que não existe"],
     stories=[STORY],
-    aggressor_side='E',
+    aggressor_side="E",
 )
 CASES = [CASE]
 

@@ -84,8 +84,7 @@ class Data:
         for case in import_from_csv(buffer):
             case = case._asdict()
             data = {
-                new_label: case.get(old_label)
-                for old_label, new_label in CASE_LABELS
+                new_label: case.get(old_label) for old_label, new_label in CASE_LABELS
             }
 
             data["stories"] = data.get("stories") or []  # avoids getting None
