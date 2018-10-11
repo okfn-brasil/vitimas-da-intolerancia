@@ -4,27 +4,26 @@
 
 /* general */
 * { font-family: 'Roboto Slab', serif; box-sizing: border-box }
-html, body, h1, h2, h3, h4, h5, p, ul, li { margin: 0; padding: 0; font-size: 1rem }
+html, body, h1, h2, h3, h4, h5, p, ul, li { margin: 0; padding: 0; font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1024 - 320)))}
+
 li { list-style-type: none }
-p, li { line-height: 1.68 }
+p, li { line-height: 1.68; font-size: 0.8rem }
 .container { max-width: 1024px; margin: 0 auto; padding: 0 20px }
 header, main, footer { padding: 3rem 0 }
-h1 { font-size: 261% }
-h2 { font-size: 168% }
+h1 { font-size: 2.6rem }
+h2 { font-size: 1.2rem }
+header p { font-size: 1rem }
+h3 { font-size: 0.8rem }
+h4 { font-size: 1rem }
 h3 { font-weight: 300; margin-bottom: 1rem }
 h4 { margin-bottom: .5rem }
 
-@media only screen and (max-width: 768px) {
-  h1 { font-size: 145% }
-  h2 { font-size: 110% }
-}
-
 /* header */
 header h1 { margin-bottom: 3rem }
-header p { font-size: 132% }
 
 @media only screen and (max-width: 768px) {
-  header p { font-size: 80% }
+  header h1 { margin-bottom: 1rem; font-size: 2rem }
+  p, li { font-size: 1rem }
 }
 
 /* about */
@@ -69,7 +68,6 @@ main .case .extra .source:before { content: ' | ' }
   main .case .image img { border-top-right-radius: .5rem }
   main .case .content { width : 100% }
   main .case .content .meta .tag:last-child { border-top-right-radius: 0 }
-  main .case .content .meta { font-size: .7rem }
 }
 
 /* footer */
@@ -86,9 +84,9 @@ footer .credits a:last-child { margin-right: 0 }
 footer .credits a img { width: 100% }
 
 @media only screen and (max-width: 768px) {
-  footer .container { display: block }
-  footer .links { display: block }
-  footer .credits { margin-top: 20px; display: block }
+  footer .container { flex-wrap: wrap }
+  footer .links { flex-basis: 100% }
+  footer .credits { margin-top: 20px; flex-basis: 100% }
   footer .credits a { margin: 1.5rem 1rem }
   footer .credits a:first-child { margin-left: 0 }
 }
@@ -99,10 +97,10 @@ footer .credits a img { width: 100% }
 
 /* buttons */
 .button { border-radius: 2rem; padding: 1rem 2rem }
-.button.big { font-size: 162%; font-weight: 700 }
+.button.big { font-size: 1.4rem; font-weight: 700 }
 
 @media only screen and (max-width: 768px) {
-  .button.big { display: block; font-size: 100%; font-weight: 700; margin: 0 20px }
+  .button.big { display: block; font-size: 1rem; font-weight: 700; margin: 0 20px }
 }
 
 /* border radius */
