@@ -1,10 +1,11 @@
-from redis import StrictRedis
+import asyncio
 
-from victims.settings import REDIS_DB, REDIS_URL
+from aiocache import caches
+
+from victims.settings import CACHE
 
 
-cache = StrictRedis.from_url(REDIS_URL, db=REDIS_DB)
-total = len(cache.keys())
-print(f"Flushing {total} key/value pair(s)")
-cache.flushall()
+loop = asyncio.get_event_loop()
+caches.set_config(CACHE)
+loop.run_until_complete(caches.get("default").clear())
 print("Done :)")
