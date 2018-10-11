@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import date
 from typing import List
 
-from violence.settings import TAG_COLORS
+from victims.settings import TAG_COLORS
 
 
 @dataclass
@@ -15,8 +15,11 @@ class Story:
     case_id: int
 
     def is_valid(self):
-        skip_sources = {'twitter', 'facebook'}
+        skip_sources = {"twitter", "facebook"}
         if self.source.lower() in skip_sources:
+            return False
+
+        if not self.title:
             return False
 
         if not self.image_or_video:
@@ -40,10 +43,7 @@ class Case:
 
     @property
     def tags_and_colors(self):
-        return (
-            (tag, TAG_COLORS.get(tag))
-            for tag in self.tags
-        )
+        return ((tag, TAG_COLORS.get(tag, "grey")) for tag in self.tags)
 
     def is_valid(self):
         return bool(self.when)

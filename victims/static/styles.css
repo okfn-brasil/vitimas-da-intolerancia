@@ -27,6 +27,9 @@ header p { font-size: 132% }
   header p { font-size: 80% }
 }
 
+/* about */
+main .about h2 { margin: 3rem 0 }
+
 /* case */
 main { padding-bottom: 6rem }
 main .case { display: flex; flex-flow: row wrap; margin-top: 6rem }
@@ -70,11 +73,25 @@ main .case .extra .source:before { content: ' | ' }
 }
 
 /* footer */
-footer img { width: 23% }
+footer .container { display: flex; padding-bottom: 3rem }
+footer .links p, footer .credits p { font-weight: 700 }
+
+footer .links { flex-basis: 32% }
+footer .links a { display: block; margin-top: .5rem }
+
+footer .credits { flex-basis: 68%; }
+footer .credits nav { display: flex; justify-content: flex-end; align-items: center; flex-wrap: nowrap }
+footer .credits a { margin: 3rem 1.5rem }
+footer .credits a:last-child img { margin-right: 0 }
+footer .credits a img { width: 100% }
 
 /**********************/
 /* functional classes */
 /**********************/
+
+/* buttons */
+.button { border-radius: 2rem; padding: 1rem 2rem }
+.button.big { font-size: 162%; font-weight: 700 }
 
 /* border radius */
 .rounded-bottom { border-bottom-left-radius: .5rem; border-bottom-right-radius: .5rem}
@@ -82,10 +99,10 @@ footer img { width: 23% }
 
 /* bg color */
 .black-bg { background-color: black }
-.gray-bg { background-color: #999 }
+.grey-bg { background-color: #999 }
 
 /* text color */
-.gray-text { color: #666 }
+.grey-text { color: #666 }
 .white-text { color: white }
 
 /* link color */
@@ -94,6 +111,8 @@ footer img { width: 23% }
 
 /* link decoration */
 .no-underline { text-decoration: none }
+.underline-hover:hover { text-decoration: underline }
 
 /* text alignment */
 .centered { text-align: center }
+.right { text-align: right }

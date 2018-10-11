@@ -3,12 +3,12 @@ from pathlib import Path
 
 import pytest
 
-from violence.data import Data
+from victims.data import Data
 
 
 FIXTURES = {
-    'cases': Path() / 'violence' / 'tests' / 'fixtures' / 'cases.csv',
-    'stories': Path() / 'violence' / 'tests' / 'fixtures' / 'stories.csv'
+    "cases": Path() / "victims" / "tests" / "fixtures" / "cases.csv",
+    "stories": Path() / "victims" / "tests" / "fixtures" / "stories.csv",
 }
 
 
@@ -20,7 +20,7 @@ def data():
 
     for name, fixture in FIXTURES.items():
         with open(fixture) as fobj:
-            data.cache.set(f'response-{name}', fobj.read(), 99)
+            data.cache.set(f"response-{name}", fobj.read(), 99)
 
     yield data
 
