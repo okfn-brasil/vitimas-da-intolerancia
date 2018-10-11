@@ -1,19 +1,19 @@
+import pickle
 from urllib.parse import urlunparse
 
-from aiocache import cached, caches
+from aioredis import create_redis
 from sanic import Sanic
 from sanic.response import redirect
 from sanic_compress import Compress
 from sanic_jinja2 import SanicJinja2
 
 from victims.data import Data
-from victims.settings import CACHE, DEBUG, STATIC_DIR, TITLE
+from victims.settings import DEBUG, REDIS_URL, STATIC_DIR, TITLE
 
 
 app = Sanic("vitimas_da_intolerancia")
 app.static("/static", str(STATIC_DIR))
 jinja = SanicJinja2(app, pkg_name="victims")
-caches.set_config(CACHE)
 Compress(app)
 
 
@@ -31,16 +31,20 @@ def force_https(request):
         return redirect(url)
 
 
-@cached(key="cases")
-async def get_cases():
-    data = Data()
-    return await data.cases()
-
-
 @app.route("/")
 @jinja.template("home.html")
 async def home(request):
-    return {"cases": await get_cases(), "title": TITLE, "url_path": "/"}
+    redis = await create_redis(REDIS_URL)
+    cases = await redis.get("cases")
+
+    if cases:
+        cases = pickle.loads(cases)
+    else:
+        data = Data()
+        cases = await data.cases()
+        await redis.set("cases", pickle.dumps(cases))
+
+    return {"cases": cases, "title": TITLE, "url_path": "/"}
 
 
 @app.route("/about.html")
