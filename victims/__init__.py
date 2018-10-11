@@ -22,6 +22,8 @@ async def clear_cache():
     keys = len(await redis.keys("*"))
     print(f"Flushing {keys} key/value pair(s)")
     await redis.flushall()
+    redis.close()
+    await redis.wait_closed()
     print("Done :)")
 
 
@@ -57,6 +59,8 @@ async def home(request):
         cases = await data.cases()
         await redis.set("cases", pickle.dumps(cases))
 
+    redis.close()
+    await redis.wait_closed()
     return {"cases": cases, "title": TITLE, "url_path": "/"}
 
 
