@@ -130,9 +130,7 @@ class Data:
 
         with BytesIO(self.get_spreadsheet("cases")) as buffer:
             # Ordering cases: first by when, then round robin aggressor_side
-            cases = sorted(
-                self.serialize_cases(buffer), key=aggressor_getter,
-            )
+            cases = sorted(self.serialize_cases(buffer), key=aggressor_getter)
             groups = groupby(cases, key=aggressor_getter)
             iterators = [
                 sorted(group, key=when_getter, reverse=True) for _, group in groups
