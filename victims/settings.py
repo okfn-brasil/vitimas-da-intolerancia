@@ -37,6 +37,7 @@ CASE_LABELS = (
     ("uf", "state"),
     ("municipio", "city"),
     ("tags", "tags"),
+    ("lado_agressor", "aggressor_side"),
 )
 
 
@@ -46,13 +47,13 @@ TAG_COLORS = {
     "agressão": "orange",
     "xenofobia": "yellow",
     "prisão": "olive",
-    "": "green",
+    "crime ambiental": "green",
     "ameaça": "teal",
-    "": "blue",
-    "": "violet",
+    "crime eleitoral": "blue",
+    "assédio moral": "violet",
     "mulher": "purple",
     "homofobia": "pink",
     "jornalista": "brown",
-    "": "grey",
-    "": "black",
+    "": "grey",  # used as default color
+    "vandalismo": "black",
 }

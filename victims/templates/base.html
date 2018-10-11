@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block html_title %}{{ title }}{% endblock %}</title>
+
+    <meta name="keywords" content="eleições;intolerância;política;crime de ódio" />
+    <meta name="description" content="Conheça os ataques motivados por intolerância política. Agressões morais, físicas e homicídios – a contagem das Eleições 2018 não é só de votos, mas também de vítimas." />
+    <meta name="author" content="Open Knowledge Brasil & Brasil.IO" />
+    <meta property="og:url" content="http://www.vitimasdaintolerancia.org{{ url_path }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="Conheça os ataques motivados por intolerância política. Agressões morais, físicas e homicídios – a contagem das Eleições 2018 não é só de votos, mas também de vítimas." />
+    <meta property="og:image" content="https://perfilpolitico.serenata.ai/images/perfil-politico-share-1200x630.png" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,700" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    {% block extra_styles %}{% endblock %}
+  </head>
+
+  <body>
+
+    <header class="centered black-bg white-text white-link">
+      <div class="container">
+        <h1>{% block main_title %}{{ title }}{% endblock %}</h1>
+        <p>
+          Conheça os ataques motivados por intolerância política. Agressões
+          morais, físicas e homicídios – a contagem das Eleições 2018 não é só
+          de votos, mas também de vítimas.
+        </p>
+        <p>
+          Os casos estão listados <b>do mais recente ao mais antigo, alternando
+            a motivação partidária dos agressores</b>. Não somos responsáveis
+          pela cobertura dos casos: usamos notícias de veículos já existentes.
+          Não encontrou uma notícia? Envie (link no final da página).
+        </p>
+      </div><!-- .container -->
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class=" black-bg white-text white-link">
+      <div class="container">
+
+        <div class="links">
+          <p>{{ title }}</p>
+          <nav>
+            <a class="no-underline" href="/about.html">Sobre o {{ title }}</a>
+          </nav>
+        </div><!-- end .links -->
+
+        <div class="credits right">
+          <p>{{ title }} é feito com amor por</p>
+          <nav>
+            <a class="no-underline" href="https://br.okfn.org/">
+              <img src="/static/okbr.png" alt="Open Knowledge Brasil">
+            </a>
+            <a class="no-underline" href="https://brasil.io/">
+              <img src="/static/brasil-io.png" alt="Brasil.IO">
+            </a>
+            <a class="no-underline" href="https://apublica.org/">
+              <img src="/static/a-publica.png" alt="Agência Pública">
+            </a>
+          </nav>
+        </div><!-- end credits -->
+      </div><!-- end .container -->
+
+      <p class="centered">
+        <a class="no-underline" href="https://github.com/okfn-brasil/vitimas-da-intolerancia/">
+          Feito com código aberto
+        </a>
+      </p>
+    </footer>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127226524-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-127226524-1');
+    </script>
+    {% block extra_scripts %}{% endblock %}
+
+  </body>
+</html>

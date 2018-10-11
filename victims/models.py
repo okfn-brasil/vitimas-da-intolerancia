@@ -31,6 +31,7 @@ class Story:
 @dataclass
 class Case:
     id: int
+    aggressor_side: str
     when: date
     state: str
     city: str
@@ -43,7 +44,7 @@ class Case:
 
     @property
     def tags_and_colors(self):
-        return ((tag, TAG_COLORS.get(tag)) for tag in self.tags)
+        return ((tag, TAG_COLORS.get(tag, "grey")) for tag in self.tags)
 
     def is_valid(self):
         return bool(self.when)

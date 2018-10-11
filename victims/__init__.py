@@ -40,13 +40,20 @@ caches.set_config(
 
 @cached(key="home")
 @app.route("/")
-@jinja.template("index.html")
+@jinja.template("home.html")
 async def home(request):
-    return {"cases": app_data.cases, "title": TITLE}
+    return {"cases": app_data.cases, "title": TITLE, "url_path": "/"}
+
+
+@cached(key="about")
+@app.route("/about.html")
+@jinja.template("about.html")
+async def about(request):
+    return {"title": TITLE, "url_path": "/about.html"}
 
 
 @cached(key='map')
-@app.route('/map')
+@app.route('/map.html')
 @jinja.template('map.html')
 async def map(request):
-    return {'cases': app_data.cases, 'title': TITLE}
+    return {"cases": app_data.cases, "title": TITLE, "url_path": "/map.html"}

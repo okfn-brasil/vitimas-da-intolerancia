@@ -19,8 +19,9 @@ CASE = Case(
     when=date(2018, 10, 7),
     state="SC",
     city="Florianópolis",
-    tags=["homicídio", "mulher"],
+    tags=["homicídio", "mulher", "tag que não existe"],
     stories=[STORY],
+    aggressor_side="E",
 )
 CASES = [CASE]
 
@@ -46,7 +47,11 @@ def test_home_contents(mocker):
         "SC",
         "Florianópolis",
         "homicídio",
+        "red",
         "mulher",
+        "purple",
+        "tag que não existe",
+        "grey",
     )
     for expected in expected_terms:
         assert expected in response.text

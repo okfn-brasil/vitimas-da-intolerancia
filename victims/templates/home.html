@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block html_title %}{{ title }}{% endblock %}
+{% block main_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<p class="centered white-link">
+  &nbsp;<br>
+  &nbsp;<br>
+  &nbsp;<br>
+  <a class="big button no-underline black-bg" href="{{ url_for('map') }}">
+      Veja um mapa interativo com os casos já registrados
+  </a>
+</p>
+
+{% for case in cases %}
+<div class="container case">
+
+  <div class="image">
+    <a href="{{ case.main_story.url }}">
+      <img class="rounded-top-left" src="{{ case.main_story.image_or_video }}" alt="Foto da matéria “{{ case.main_story.title }}”">
+    </a>
+  </div><!-- end .image -->
+
+  <div class="content black-link">
+    <div class="meta">
+      <div class="source grey-bg white-text">{{ case.main_story.source }}</div>
+      {% for tag, color in case.tags_and_colors %}
+      <div class="tag {{ color }}">{{ tag }}</div>
+      {% endfor %}
+    </div><!-- end .meta -->
+
+    <h2>
+      <a class="no-underline" href="{{ case.main_story.url }}">{{ case.main_story.title }}</a>
+    </h2>
+
+    <h3 class="grey-text">
+      {{ case.city }}, {{ case.state }} &mdash; {{ case.when.strftime('%d/%m/%Y') }}
+    </h3>
+    <p>{{ case.main_story.summary }}</p>
+
+  </div><!-- end .content -->
+
+  <div class="extra grey-bg white-text white-link rounded-bottom">
+    {% if case.stories|length > 1 %}
+    <h4>
+      {% if case.stories|length == 2 %}
+      Outra matéria
+      {% else %}
+      Outras matérias
+      {% endif %}
+      sobre o mesmo caso:
+    </h4>
+    <ul>
+      {% for story in case.stories %}
+      {% if not loop.first %}
+      <li>
+        <a class="no-underline" href="{{ story.url }}">
+          {{ story.title }}
+          <span class="source">{{ story.source }}</span>
+        </a>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div><!-- end .extra -->
+</div><!-- end .case -->
+{% endfor %}
+
+<p class="centered white-link">
+  &nbsp;<br>
+  &nbsp;<br>
+  &nbsp;<br>
+  <a class="big button no-underline black-bg" href="https://docs.google.com/forms/d/1JiiK1aQD9aKDSRi6t-JA6J98PXKi9lorNgZAoIuY058/edit">
+    Sabe de mais algum caso ou matéria que não está aqui?
+    Relate aqui!
+  </a>
+</p>
+{% endblock %}
