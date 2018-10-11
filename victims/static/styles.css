@@ -86,9 +86,9 @@ footer .credits a:last-child img { margin-right: 0 }
 footer .credits a img { width: 100% }
 
 @media only screen and (max-width: 768px) {
-  footer .container { display: block }
-  footer .links { display: block }
-  footer .credits { margin-top: 20px; display: block }
+  footer .container { flex-wrap: wrap }
+  footer .links { flex-basis: 100% }
+  footer .credits { margin-top: 20px; flex-basis: 100% }
 }
 
 /**********************/
