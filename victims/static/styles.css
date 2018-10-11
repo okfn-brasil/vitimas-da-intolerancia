@@ -85,6 +85,12 @@ footer .credits a { margin: 3rem 1.5rem }
 footer .credits a:last-child img { margin-right: 0 }
 footer .credits a img { width: 100% }
 
+@media only screen and (max-width: 768px) {
+  footer .container { display: block }
+  footer .links { display: block }
+  footer .credits { margin-top: 20px; display: block }
+}
+
 /**********************/
 /* functional classes */
 /**********************/
@@ -92,6 +98,10 @@ footer .credits a img { width: 100% }
 /* buttons */
 .button { border-radius: 2rem; padding: 1rem 2rem }
 .button.big { font-size: 162%; font-weight: 700 }
+
+@media only screen and (max-width: 768px) {
+  .button.big { display: block; font-size: 100%; font-weight: 700; margin: 0 20px }
+}
 
 /* border radius */
 .rounded-bottom { border-bottom-left-radius: .5rem; border-bottom-right-radius: .5rem}
@@ -116,3 +126,7 @@ footer .credits a img { width: 100% }
 /* text alignment */
 .centered { text-align: center }
 .right { text-align: right }
+
+@media only screen and (max-width: 768px) {
+  .right { text-align: inherit }
+}
