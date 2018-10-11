@@ -25,9 +25,6 @@ def round_robin(*iterables):
 class Data:
     async def fetch(self, session, url):
         async with session.get(url) as response:
-            print(f"Fetching {url}")
-            print(f"Fetching {url}")
-            print(f"Fetching {url}")
             return await response.read()
 
     async def fetch_spreadsheets(self):
