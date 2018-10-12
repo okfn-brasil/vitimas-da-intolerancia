@@ -31,6 +31,7 @@ def test_data_cases_property(mocker):
     cases[0].when == date(2018, 10, 8)
     cases[-1].when == date(2018, 10, 3)
 
+
 def test_data_cases_property_by_request():
     data = Data()
     loop = asyncio.get_event_loop()
