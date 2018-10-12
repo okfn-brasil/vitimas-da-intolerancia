@@ -13,6 +13,7 @@ from victims.settings import (
     CASE_LABELS,
     STORIES_SPREADSHEET_GID,
     STORY_LABELS,
+    DEBUG,
 )
 
 
@@ -24,6 +25,7 @@ def round_robin(*iterables):
 
 class Data:
     async def fetch(self, session, url):
+        session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) if DEBUG else session
         async with session.get(url) as response:
             return await response.read()
 
