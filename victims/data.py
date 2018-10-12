@@ -25,9 +25,10 @@ def round_robin(*iterables):
 
 class Data:
     async def fetch(self, session, url):
-        session = aiohttp.ClientSession(
-            connector=aiohttp.TCPConnector(verify_ssl=DEBUG)
-        )
+        if DEBUG:
+            session = aiohttp.ClientSession(
+                connector=aiohttp.TCPConnector(verify_ssl=False)
+            )
         async with session.get(url) as response:
             return await response.read()
 
