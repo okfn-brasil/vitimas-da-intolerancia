@@ -30,5 +30,30 @@
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
       integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
       crossorigin=""></script>
-    <script src="/static/map.js"></script>
+    <script>
+    $(document).ready(function () {
+        var brazil = [-14.23, -51.92];
+        var map    = L.map('map').setView(brazil, 4);
+
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 13,
+            minZoom: 4
+        }).addTo(map);
+
+        // fit bounds to brazil country only
+        var limit = new L.Polyline([
+            [3.84, -51.83], // oiapoque
+            [-33.68, -53.45] // chuí
+        ]);
+        var bounds = limit.getBounds();
+        map.fitBounds(bounds).setMaxBounds(bounds);
+
+        // fill markers
+        {% for case in cases %}
+        var marker = L.marker({{ case.latlng|safe}}).addTo(map);
+        marker.bindPopup("<strong>{{ case.city }} - {{ case.state }}</strong><br/><strong><a href=\"{{ case.main_story.url }}\">{{ case.main_story.title|e }}</a></strong><br/><br/>");
+        {% endfor %}
+    });
+    </script>
 {% endblock %}

@@ -43,9 +43,16 @@ class Data:
             data = {new: case.get(old) for old, new in CASE_LABELS}
 
             data["stories"] = data.get("stories") or []  # avoids getting None
+
+            # serializing tags
             data["tags"] = data.get("tags") or ""  # avoids getting None
             data["tags"] = data["tags"].split("|")
             data["tags"] = [tag.strip().lower() for tag in data["tags"] if tag]
+
+            # serializing  latitude and longitude
+            data["latlng"] = data["latlng"].strip() or ""
+            data["latlng"] = data["latlng"].split(",")
+            data["latlng"] = list(map(float, data["latlng"]))
 
             case = Case(**data)
             if not case.is_valid():

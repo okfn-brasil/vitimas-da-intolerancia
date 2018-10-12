@@ -53,4 +53,4 @@ async def about(request):
 @app.route('/map.html')
 @jinja.template('map.html')
 async def map(request):
-    return {"cases": app_data.cases, "title": TITLE, "url_path": "/map.html"}
+    return {"cases": await get_cases(), "title": TITLE, "url_path": "/map.html"}

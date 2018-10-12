@@ -49,6 +49,7 @@ CASE_LABELS = (
     ("uf", "state"),
     ("municipio", "city"),
     ("tags", "tags"),
+    ("latlon", "latlng"),
     ("lado_agressor", "aggressor_side"),
 )
 

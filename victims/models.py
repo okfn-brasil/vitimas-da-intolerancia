@@ -35,6 +35,7 @@ class Case:
     when: date
     state: str
     city: str
+    latlng: List[float]
     tags: List[str]
     stories: List[Story]
 
