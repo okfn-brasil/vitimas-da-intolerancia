@@ -25,9 +25,12 @@ def round_robin(*iterables):
 
 class Data:
     async def fetch(self, session, url):
-        session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=DEBUG))
+        session = aiohttp.ClientSession(
+            connector=aiohttp.TCPConnector(verify_ssl=DEBUG)
+        )
         async with session.get(url) as response:
             return await response.read()
+
     async def fetch_spreadsheets(self):
         loop = asyncio.get_event_loop()
         urls = (
