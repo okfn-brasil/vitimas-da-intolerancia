@@ -7,7 +7,7 @@ from sanic_compress import Compress
 from sanic_jinja2 import SanicJinja2
 
 from victims.data import Data
-from victims.settings import CACHE, DEBUG, STATIC_DIR, TITLE
+from victims.settings import CACHE, DEBUG, STATIC_DIR, TITLE, CASE_MAX_CHARS
 
 
 app = Sanic("vitimas_da_intolerancia")
@@ -40,7 +40,12 @@ async def get_cases():
 @app.route("/")
 @jinja.template("home.html")
 async def home(request):
-    return {"cases": await get_cases(), "title": TITLE, "url_path": "/"}
+    return {
+        "cases": await get_cases(),
+        "title": TITLE,
+        "url_path": "/",
+        "max_chars": CASE_MAX_CHARS,
+    }
 
 
 @app.route("/about.html")
