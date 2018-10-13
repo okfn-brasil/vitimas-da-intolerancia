@@ -2,7 +2,7 @@ from urllib.parse import urlunparse
 
 from aiocache import cached, caches
 from sanic import Sanic
-from sanic.response import redirect
+from sanic.response import json, redirect
 from sanic_compress import Compress
 from sanic_jinja2 import SanicJinja2
 
@@ -47,3 +47,10 @@ async def home(request):
 @jinja.template("about.html")
 async def about(request):
     return {"title": TITLE, "url_path": "/about.html"}
+
+
+@app.route("/data.json")
+async def data(request):
+    cases = await get_cases()
+    cases = [case.to_JSON() for case in cases]
+    return json(cases)
