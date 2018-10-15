@@ -30,10 +30,3 @@ def test_data_cases_property(mocker):
     assert len(cases) == 5
     cases[0].when == date(2018, 10, 8)
     cases[-1].when == date(2018, 10, 3)
-
-
-def test_data_cases_property_by_request():
-    data = Data()
-    loop = asyncio.get_event_loop()
-    cases = loop.run_until_complete(data.cases())
-    assert len(cases) == 3
