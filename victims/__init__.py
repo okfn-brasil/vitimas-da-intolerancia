@@ -8,7 +8,7 @@ from sanic_compress import Compress
 from sanic_jinja2 import SanicJinja2
 
 from victims.data import Data
-from victims.settings import DEBUG, REDIS_URL, STATIC_DIR, TITLE
+from victims.settings import CASE_MAX_CHARS, DEBUG, REDIS_URL, STATIC_DIR, TITLE
 
 
 app = Sanic("vitimas_da_intolerancia")
@@ -27,7 +27,7 @@ async def clear_cache():
     print("Done :)")
 
 
-@app.listener('before_server_start')
+@app.listener("before_server_start")
 async def before_start(app, loop):
     await clear_cache()
 
@@ -61,7 +61,13 @@ async def home(request):
 
     redis.close()
     await redis.wait_closed()
-    return {"cases": cases, "title": TITLE, "url_path": "/"}
+
+    return {
+        "cases": cases,
+        "title": TITLE,
+        "url_path": "/",
+        "max_chars": CASE_MAX_CHARS,
+    }
 
 
 @app.route("/about.html")
