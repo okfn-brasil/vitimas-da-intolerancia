@@ -79,4 +79,17 @@ async def about(request):
 @app.route('/map.html')
 @jinja.template('map.html')
 async def map(request):
-    return {"cases": await get_cases(), "title": TITLE, "url_path": "/map.html"}
+    redis = await create_redis(REDIS_URL)
+    cases = await redis.get("cases")
+
+    if cases:
+        cases = pickle.loads(cases)
+    else:
+        data = Data()
+        cases = await data.cases()
+        await redis.set("cases", pickle.dumps(cases))
+
+    redis.close()
+    await redis.wait_closed()
+
+    return {"cases": cases, "title": "Mapa Interativo", "url_path": "/map.html"}
