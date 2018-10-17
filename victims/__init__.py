@@ -76,7 +76,6 @@ async def about(request):
     return {"title": TITLE, "url_path": "/about.html"}
 
 
-@cached(key='map')
 @app.route('/map.html')
 @jinja.template('map.html')
 async def map(request):

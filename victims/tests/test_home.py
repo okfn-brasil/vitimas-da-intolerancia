@@ -22,6 +22,7 @@ async def mocked_cases(_self):
         tags=["homicídio", "mulher", "tag que não existe"],
         stories=[story],
         aggressor_side="E",
+        latlng=[12.35, -12.35],
     )
     return (case,)
 

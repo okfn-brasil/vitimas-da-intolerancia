@@ -1,11 +1,11 @@
-Id,lado agressor,Data,UF,Município,Tags
-1,D,2018-10-07,BA,Salvador,Homicídio
-2,E,2018-10-07,AL,Maceió,Agressão|Mulher
-3,D,2018-10-03,PR,Curitiba,Homicídio|Homofobia
-4,E,2018-10-05,BA,Salvador,Agressão|Prisão
-5,D,2018-10-07,PE,Recife,Agressão|Jornalista|Mulher
-6,E,2018-10-08,RS,,
-7,D,,?PB,?Campina Grande,Ameaça|Mulher
-8,E,,,,Xenofobia
-9,D,2018-10-07,PR,Curitiba,Agressão|Ameaça
-10,E,2018-10-06,PR,Maringá,Agressão|Mulher
+Id,lado agressor,Data,UF,Município,Tags,latlon
+1,D,2018-10-07,BA,Salvador,Homicídio,"-12.964150,-38.505821  "
+2,E,2018-10-07,AL,Maceió,Agressão|Mulher,"-9.665220, -35.735710"
+3,D,2018-10-03,PR,Curitiba,Homicídio|Homofobia,"-25.480877,-49.304424"
+4,E,2018-10-05,BA,Salvador,Agressão|Prisão,"-12.964150,-38.505821  "
+5,D,2018-10-07,PE,Recife,Agressão|Jornalista|Mulher,"-8.055190, -34.871181"
+6,E,2018-10-08,RS,,,"-7.230950,-35.881890"
+7,D,,?PB,?Campina Grande,Ameaça|Mulher,"-25.480877,-49.304424"
+8,E,,,,Xenofobia,"-23.427320,-51.936960"
+9,D,2018-10-07,PR,Curitiba,Agressão|Ameaça,"-25.480877,-49.304424"
+10,E,2018-10-06,PR,Maringá,Agressão|Mulher,"-25.480877,-49.304424"
