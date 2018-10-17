@@ -1,11 +1,8 @@
 import asyncio
 
-from aiocache import caches
-
-from victims.settings import CACHE
+from victims import clear_cache
 
 
-loop = asyncio.get_event_loop()
-caches.set_config(CACHE)
-loop.run_until_complete(caches.get("default").clear())
-print("Done :)")
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(clear_cache())

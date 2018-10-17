@@ -1,5 +1,4 @@
 from pathlib import Path
-from urllib.parse import urlparse
 
 from decouple import config
 
@@ -10,19 +9,10 @@ DEBUG = config("DEBUG", default="False", cast=bool)
 HOST = config("HOST", default="0.0.0.0")
 PORT = config("PORT", default="8000", cast=int)
 STATIC_DIR = Path() / "victims" / "static"
+# 558 chars + … = 559 chars
+CASE_MAX_CHARS = config("CASE_MAX_CHARS", default=559, cast=int)
 
 REDIS_URL = config("REDIS_URL", default="redis://localhost:6379/")
-REDIS_DB = config("REDIS_DB", default="0", cast=int)
-CACHE = {
-    "default": {
-        "cache": "aiocache.RedisCache",
-        "timeout": config("CACHE_DATA_FOR", default="3", cast=int) * 3600,
-        "endpoint": urlparse(REDIS_URL).hostname,
-        "port": urlparse(REDIS_URL).port,
-        "db": REDIS_DB,
-        "serializer": {"class": "aiocache.serializers.StringSerializer"},
-    }
-}
 
 SPREADSHEET_ID = config(
     "SPREADSHEET_ID", default="1C73e7Lph1fNGontBodEDFZ4oqn3cC2oB_0Av3vRTiRw"

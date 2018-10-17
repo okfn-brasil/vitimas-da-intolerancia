@@ -37,7 +37,8 @@
     <h3 class="grey-text">
       {{ case.city }}, {{ case.state }} &mdash; {{ case.when.strftime('%d/%m/%Y') }}
     </h3>
-    <p>{{ case.main_story.summary|e }}</p>
+    <p>{{ case.main_story.summary|e|truncate(max_chars, False, '…') }}</p>
+    <p><a href="{{ case.main_story.url }}">Ler mais</a></p>
 
   </div><!-- end .content -->
 
