@@ -133,3 +133,28 @@ footer .credits a img { width: 100% }
 @media only screen and (max-width: 768px) {
   .right { text-align: inherit }
 }
+
+/* social media buttons */
+.share-buttons {
+    cursor: pointer;
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+.share-buttons li {
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    padding-right: 3em;
+    background-repeat: no-repeat;
+}
+
+.share-buttons .twitter {
+    background-image: url('/static/twitter.png');
+}
+.share-buttons .facebook {
+    background-image: url('/static/facebook.png');
+}
+.share-buttons .whatsapp {
+    background-image: url('/static/whatsapp.png');
+}

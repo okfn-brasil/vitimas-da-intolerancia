@@ -28,9 +28,13 @@
     <h3 class="grey-text">
       {{ case.city }}, {{ case.state }} &mdash; {{ case.when.strftime('%d/%m/%Y') }}
     </h3>
-    <p>{{ case.main_story.summary|e|truncate(max_chars, False, '…') }}</p>
-    <p><a href="{{ case.main_story.url }}">Ler mais</a></p>
-
+    <p>{{ case.main_story.summary|e|truncate(max_chars, False, '…') }} &nbsp;<a href="{{ case.main_story.url }}">Ler mais</a></p>
+    <p><strong>Compartilhar:</strong></p>
+    <ul class="share-buttons">
+        <li class="twitter" data-url="{{ case.main_story.url }}" data-sharer="twitter" data-title="{{ case.main_story.title|e }}" data-hashtags="vitimasdaintolerancia"></li>
+        <li class="facebook" data-url="{{ case.main_story.url }}" data-sharer="facebook" data-title="{{ case.main_story.title|e }}" data-hashtag="vitimasdaintolerancia"></li>
+        <li class="whatsapp" data-url="{{ case.main_story.url }}" data-sharer="whatsapp" data-title="{{ case.main_story.title|e }} #vítimasdaintolerancia"></li>
+    </ul>
   </div><!-- end .content -->
 
   <div class="extra grey-bg white-text white-link rounded-bottom">
@@ -69,4 +73,8 @@
     Relate aqui!
   </a>
 </p>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/sharer.js@0.3.4/sharer.min.js"></script>
 {% endblock %}
