@@ -1,3 +1,5 @@
+import json
+
 from dataclasses import dataclass
 from datetime import date
 from typing import List
@@ -27,6 +29,17 @@ class Story:
 
         return True
 
+    def to_json(self):
+        items = {
+            "url": self.url,
+            "source": self.source,
+            "title": self.title,
+            "image_or_video": self.image_or_video,
+            "summary": self.summary,
+            "case_id": self.case_id,
+        }
+        return json.dumps(items, sort_keys=True)
+
 
 @dataclass
 class Case:
@@ -48,3 +61,15 @@ class Case:
 
     def is_valid(self):
         return bool(self.when)
+
+    def to_json(self):
+        items = {
+            "id": self.id,
+            "aggressor_side": self.aggressor_side,
+            "when": str(self.when),
+            "state": self.state,
+            "city": self.city,
+            "tags": self.tags,
+            "stories": [story.to_JSON() for story in self.stories],
+        }
+        return json.dumps(items, sort_keys=True)
