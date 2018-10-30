@@ -13,6 +13,7 @@ from victims.settings import (
     CASE_LABELS,
     STORIES_SPREADSHEET_GID,
     STORY_LABELS,
+    DEBUG,
 )
 
 
@@ -28,12 +29,14 @@ class Data:
             return await response.read()
 
     async def fetch_spreadsheets(self):
-        loop = asyncio.get_event_loop()
         urls = (
             BASE_SPREADSHEET_URL + CASES_SPREADSHEET_GID,
             BASE_SPREADSHEET_URL + STORIES_SPREADSHEET_GID,
         )
-        async with aiohttp.ClientSession(loop=loop) as session:
+        kwargs = {"loop": asyncio.get_event_loop()}
+        if DEBUG:
+            kwargs = {"connector": aiohttp.TCPConnector(verify_ssl=False)}
+        async with aiohttp.ClientSession(**kwargs) as session:
             requests = tuple(self.fetch(session, url) for url in urls)
             return await asyncio.gather(*requests)
 
