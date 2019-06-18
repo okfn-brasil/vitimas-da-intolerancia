@@ -17,7 +17,6 @@ python-decouple = "*"
 rows = "*"
 sanic-jinja2 = "*"
 sanic = "*"
-sanic_compress = "*"
 
 [requires]
 python_version = "3.7"
