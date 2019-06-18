@@ -8,15 +8,14 @@ codecov = "*"
 ipython = "*"
 pytest = "*"
 pytest-cov = "*"
+pytest-flask = "*"
 pytest-mock = "*"
-pytest-sanic = "*"
 
 [packages]
 aiohttp = "*"
+Flask = "*"
 python-decouple = "*"
 rows = "*"
-sanic-jinja2 = "*"
-sanic = "*"
 
 [requires]
 python_version = "3.7"

@@ -3,12 +3,8 @@ from pathlib import Path
 from decouple import config
 
 
+PROJECT_DIRECTORY = Path(__file__).parent
 TITLE = "#VítimasDaIntolerância"
-
-DEBUG = config("DEBUG", default="False", cast=bool)
-HOST = config("HOST", default="0.0.0.0")
-PORT = config("PORT", default="8000", cast=int)
-STATIC_DIR = Path() / "victims" / "static"
 CASE_MAX_CHARS = config("CASE_MAX_CHARS", default=559, cast=int)  # 558 chars + …
 
 SPREADSHEET_ID = config(

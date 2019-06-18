@@ -28,7 +28,7 @@ to read a custom spreadsheet:
 Install the dependencies with `pipenv install` and spin up the server with:
 
 ```sh
-$ python run.py
+$ pipenv run flask run
 ```
 
 ## Contributing

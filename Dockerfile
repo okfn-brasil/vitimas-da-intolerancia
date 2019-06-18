@@ -1,6 +1,10 @@
 FROM python:3.7.3-alpine
 
 ENV PYTHONBREAKPOINT=ipdb.set_trace
+ENV FLASK_ENV development
+ENV FLASK_APP victims/__init__.py
+ENV FLASK_SKIP_DOTENV 1
+
 WORKDIR /code
 
 COPY Pipfile* /code/
@@ -15,7 +19,6 @@ RUN apk update && \
 
 COPY .coveragerc .coveragerc
 COPY pytest.ini pytest.ini
-COPY run.py run.py
 COPY victims/ victims/
 
-CMD ["pipenv", "run", "python", "run.py"]
+CMD ["pipenv", "run", "flask", "run"]

@@ -1,6 +1,5 @@
 from datetime import date
 
-from victims import app
 from victims.data import Data
 from victims.models import Case, Story
 
@@ -26,15 +25,14 @@ async def mocked_cases(_self):
     return (case,)
 
 
-def test_home_status(mocker):
+def test_home_status(client, mocker):
     mocker.patch.object(Data, "cases", new=mocked_cases)
-    _, response = app.test_client.get("/")
-    assert response.status == 200
+    assert client.get("/").status_code == 200
 
 
-def test_home_contents(mocker):
+def test_home_contents(client, mocker):
     mocker.patch.object(Data, "cases", new=mocked_cases)
-    _, response = app.test_client.get("/")
+    contents = client.get("/").data.decode("utf-8")
     expected_terms = (
         "#VítimasDaIntolerância",
         "https://florianopol.is/",
@@ -52,4 +50,4 @@ def test_home_contents(mocker):
         "grey",
     )
     for expected in expected_terms:
-        assert expected in response.text
+        assert expected in contents
