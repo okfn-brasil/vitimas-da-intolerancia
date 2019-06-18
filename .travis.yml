@@ -8,7 +8,8 @@ services:
 
 before_install:
   - cp .env.sample .env
-  - pip install -r requirements.txt
+  - python -m pip install -U pipenv black
+  - pipenv install --dev
 
 script:
   - pytest
