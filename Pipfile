@@ -13,7 +13,6 @@ pytest-sanic = "*"
 
 [packages]
 aiohttp = "*"
-aioredis = "*"
 python-decouple = "*"
 rows = "*"
 sanic-jinja2 = "*"

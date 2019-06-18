@@ -15,7 +15,6 @@ RUN apk update && \
 
 COPY .coveragerc .coveragerc
 COPY pytest.ini pytest.ini
-COPY clear_cache.py clear_cache.py
 COPY run.py run.py
 COPY victims/ victims/
 

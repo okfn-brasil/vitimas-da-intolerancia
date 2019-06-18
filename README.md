@@ -6,7 +6,7 @@
 
 Hate crimes monitor for political motivated assaults in Brazil.
 
-Requires a Google account, Python 3.7 with [Pipenv](https://pipenv.readthedocs.io/) and Redis.
+Requires a Google account and Python 3.7 with [Pipenv](https://pipenv.readthedocs.io/).
 
 ## Settings
 
@@ -29,12 +29,6 @@ Install the dependencies with `pipenv install` and spin up the server with:
 
 ```sh
 $ python run.py
-```
-
-If you wanna clear the cache:
-
-```sh
-$ python clear_cache.py
 ```
 
 ## Contributing
