@@ -1,6 +1,7 @@
 import asyncio
 
 from flask import Flask, render_template
+from flask_frozen import Freezer
 
 from victims.data import Data
 from victims.settings import CASE_MAX_CHARS, PROJECT_DIRECTORY, TITLE
@@ -31,3 +32,10 @@ def home():
 @app.route("/about.html")
 def about():
     return render("about.html")
+
+
+@app.cli.command()
+def build():
+    """Build the static files version of this website."""
+    freezer = Freezer(app)
+    freezer.freeze()

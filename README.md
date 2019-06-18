@@ -23,28 +23,39 @@ to read a custom spreadsheet:
 * The `gid` URL parameter Google generates when exporting each spreadsheet as
   CSV is the value of `CASES_SPREADSHEET_GID` and `STORIES_SPREADSHEET_GID`
 
-## Running the server
+## Running the app
 
-Install the dependencies with `pipenv install` and spin up the server with:
+Install the dependencies and activate the virtualenv:
 
 ```sh
-$ pipenv run flask run
+$ pipenv install
+$ pipenv shell
+```
+
+### Server for development
+
+Spin up the server with:
+
+```sh
+$ flask run
+```
+
+## Static files for production
+
+Create the static files version at `build/` with:
+
+```sh
+flask build
 ```
 
 ## Contributing
 
-Make yourself at home, write tests and format code with
+Install development dependencies, make yourself at home, write tests and format code with
 [Black](https://github.com/ambv/black):
 
 ```sh
-$ black .
-```
-
-## Tests
-
-Run tests with:
-
-```sh
+$ pipenv install --dev
+$ pip install black
 $ pytest
 $ black . --check
 ```
