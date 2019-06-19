@@ -1,8 +1,10 @@
 import asyncio
-from subprocess import Popen, PIPE
+from collections import namedtuple
 
+import click
 from flask import Flask, render_template
 from flask_frozen import Freezer
+from ghp_import import Git, run_import
 
 from victims.data import Data
 from victims.settings import CASE_MAX_CHARS, CNAME, PROJECT_DIRECTORY, TITLE
@@ -43,8 +45,20 @@ def build():
 
 
 @app.cli.command()
-def publish():
+@click.option("--force", is_flag=True)
+def publish(force):
     """Publish build/ contents to gh-pages branch using `ghp-import`."""
-    command = ["ghp-import", "--cname", CNAME, "--push", "--force", "build/"]
-    process = Popen(command, stdout=PIPE, stderr=PIPE, stdin=PIPE)
-    process.stdin.write(process.stdout.read())
+    git = Git()
+    args = ["push", "origin", "gh-pages"]
+    if force:
+        args.append("--force")
+
+    # lets mock the optparse object
+    keys = ("use_shell", "branch", "mesg", "followlinks", "nojekyll", "cname")
+    values = (False, "gh-pages", "Publish website", False, False, CNAME)
+    Options = namedtuple("Options", keys)
+    options = Options(*values)
+
+    # run ghp-import
+    run_import(git, "build", options)
+    git.check_call(*args)
