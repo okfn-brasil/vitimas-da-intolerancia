@@ -6,7 +6,8 @@
 
 Hate crimes monitor for political motivated assaults in Brazil.
 
-Requires a Google account, Python 3.7 and Redis.
+Requires a Google account and Python 3.7 with
+[Pipenv](https://pipenv.readthedocs.io/).
 
 ## Settings
 
@@ -23,35 +24,41 @@ to read a custom spreadsheet:
 * The `gid` URL parameter Google generates when exporting each spreadsheet as
   CSV is the value of `CASES_SPREADSHEET_GID` and `STORIES_SPREADSHEET_GID`
 
-## Running the server
+## Running the app
 
-Install the dependencies with `pip install -r requirements.txt` and spin up the
-server with:
+Install the dependencies and activate the virtualenv:
 
 ```sh
-$ python run.py
+$ pipenv install
+$ pipenv shell
 ```
 
-If you wanna clear the cache:
+### Server for development
+
+Spin up the server with:
 
 ```sh
-$ python clear_cache.py
+$ flask run
+```
+
+## Static files for production
+
+Create the static files version at `build/` and publich it to the `gh-pages`
+branch with:
+
+```sh
+$ flask build
+$ flask publish
 ```
 
 ## Contributing
 
-Make yourself at home, write tests and format code with
-[Black](https://github.com/ambv/black):
+Install development dependencies, make yourself at home, write tests and format
+code with [Black](https://github.com/ambv/black):
 
 ```sh
-$ black .
-```
-
-## Tests
-
-Run tests with:
-
-```sh
+$ pipenv install --dev
+$ pip install black
 $ pytest
 $ black . --check
 ```

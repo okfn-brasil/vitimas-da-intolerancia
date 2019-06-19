@@ -1,76 +1,64 @@
-import pickle
-from urllib.parse import urlunparse
+import asyncio
+from collections import namedtuple
 
-from aioredis import create_redis
-from sanic import Sanic
-from sanic.response import redirect
-from sanic_compress import Compress
-from sanic_jinja2 import SanicJinja2
+import click
+from flask import Flask, render_template
+from flask_frozen import Freezer
+from ghp_import import Git, run_import
 
 from victims.data import Data
-from victims.settings import CASE_MAX_CHARS, DEBUG, REDIS_URL, STATIC_DIR, TITLE
+from victims.settings import CASE_MAX_CHARS, CNAME, PROJECT_DIRECTORY, TITLE
 
 
-app = Sanic("vitimas_da_intolerancia")
-app.static("/static", str(STATIC_DIR))
-jinja = SanicJinja2(app, pkg_name="victims")
-Compress(app)
+app = Flask(
+    "vitimas-da-intolerância",
+    static_folder=PROJECT_DIRECTORY / "static",
+    template_folder=PROJECT_DIRECTORY / "templates",
+)
 
 
-async def clear_cache():
-    redis = await create_redis(REDIS_URL)
-    keys = len(await redis.keys("*"))
-    print(f"Flushing {keys} key/value pair(s)")
-    await redis.flushall()
-    redis.close()
-    await redis.wait_closed()
-    print("Done :)")
-
-
-@app.listener("before_server_start")
-async def before_start(app, loop):
-    await clear_cache()
-
-
-@app.middleware("request")
-def force_https(request):
-    if DEBUG:
-        return None
-
-    host = request.headers.get("Host", "")
-    protocol = "https" if request.transport.get_extra_info("sslcontext") else "http"
-
-    if request.headers.get("x-forwarded-proto", protocol) == "http":
-        args = ("https", host, request.path, None, request.query_string, None)
-        url = urlunparse(args)
-        return redirect(url)
+def render(template, **kwargs):
+    url_path = f"/{template}" if template != "home.html" else "/"
+    context = {"title": TITLE, "url_path": url_path}
+    if kwargs:
+        context.update(kwargs)
+    return render_template(template, **context)
 
 
 @app.route("/")
-@jinja.template("home.html")
-async def home(request):
-    redis = await create_redis(REDIS_URL)
-    cases = await redis.get("cases")
-
-    if cases:
-        cases = pickle.loads(cases)
-    else:
-        data = Data()
-        cases = await data.cases()
-        await redis.set("cases", pickle.dumps(cases))
-
-    redis.close()
-    await redis.wait_closed()
-
-    return {
-        "cases": cases,
-        "title": TITLE,
-        "url_path": "/",
-        "max_chars": CASE_MAX_CHARS,
-    }
+def home():
+    data = Data()
+    cases = asyncio.run(data.cases())
+    return render("home.html", cases=cases, max_chars=CASE_MAX_CHARS)
 
 
 @app.route("/about.html")
-@jinja.template("about.html")
-async def about(request):
-    return {"title": TITLE, "url_path": "/about.html"}
+def about():
+    return render("about.html")
+
+
+@app.cli.command()
+def build():
+    """Build the static files version of this website."""
+    freezer = Freezer(app)
+    freezer.freeze()
+
+
+@app.cli.command()
+@click.option("--force", is_flag=True)
+def publish(force):
+    """Publish build/ contents to gh-pages branch using `ghp-import`."""
+    git = Git()
+    args = ["push", "origin", "gh-pages"]
+    if force:
+        args.append("--force")
+
+    # lets mock the optparse object
+    keys = ("use_shell", "branch", "mesg", "followlinks", "nojekyll", "cname")
+    values = (False, "gh-pages", "Publish website", False, False, CNAME)
+    Options = namedtuple("Options", keys)
+    options = Options(*values)
+
+    # run ghp-import
+    run_import(git, "build", options)
+    git.check_call(*args)
