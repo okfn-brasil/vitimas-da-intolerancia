@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 codecov = "*"
+ghp-import = "*"
 ipython = "*"
 pytest = "*"
 pytest-cov = "*"

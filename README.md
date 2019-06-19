@@ -6,7 +6,8 @@
 
 Hate crimes monitor for political motivated assaults in Brazil.
 
-Requires a Google account and Python 3.7 with [Pipenv](https://pipenv.readthedocs.io/).
+Requires a Google account and Python 3.7 with
+[Pipenv](https://pipenv.readthedocs.io/).
 
 ## Settings
 
@@ -45,13 +46,24 @@ $ flask run
 Create the static files version at `build/` with:
 
 ```sh
-flask build
+$ flask build
+```
+
+And push the `gh-pages` branch to GitHub with
+[`ghp-import`](https://github.com/davisp/ghp-import):
+
+```sh
+$ ghp-import \
+    --cname www.vitimasdaintolerancia.org \
+    --push \
+    --force \
+    build/
 ```
 
 ## Contributing
 
-Install development dependencies, make yourself at home, write tests and format code with
-[Black](https://github.com/ambv/black):
+Install development dependencies, make yourself at home, write tests and format
+code with [Black](https://github.com/ambv/black):
 
 ```sh
 $ pipenv install --dev
