@@ -5,15 +5,13 @@ from pathlib import Path
 from victims.data import Data, round_robin
 
 
-FIXTURES = (
-    Path() / "victims" / "tests" / "fixtures" / "cases.csv",
-    Path() / "victims" / "tests" / "fixtures" / "stories.csv",
-)
+FIXTURES = Path() / "victims" / "tests" / "fixtures"
+CASES = FIXTURES / "cases.csv"
+STORIES = FIXTURES / "stories.csv"
 
 
 async def mocked_responses(_self):
-    with open(FIXTURES[0], "rb") as cases, open(FIXTURES[1], "rb") as stories:
-        return (cases.read(), stories.read())
+    return CASES.read_bytes(), STORIES.read_bytes()
 
 
 def test_round_robin():
@@ -22,10 +20,7 @@ def test_round_robin():
 
 def test_data_cases_property(mocker):
     mocker.patch.object(Data, "fetch_spreadsheets", new=mocked_responses)
-
-    data = Data()
-    loop = asyncio.get_event_loop()
-    cases = loop.run_until_complete(data.cases())
+    cases = asyncio.run(Data().cases())
 
     assert len(cases) == 5
     cases[0].when == date(2018, 10, 8)
