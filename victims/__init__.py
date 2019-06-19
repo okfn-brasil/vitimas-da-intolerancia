@@ -1,10 +1,11 @@
 import asyncio
+from subprocess import Popen, PIPE
 
 from flask import Flask, render_template
 from flask_frozen import Freezer
 
 from victims.data import Data
-from victims.settings import CASE_MAX_CHARS, PROJECT_DIRECTORY, TITLE
+from victims.settings import CASE_MAX_CHARS, CNAME, PROJECT_DIRECTORY, TITLE
 
 
 app = Flask(
@@ -39,3 +40,11 @@ def build():
     """Build the static files version of this website."""
     freezer = Freezer(app)
     freezer.freeze()
+
+
+@app.cli.command()
+def publish():
+    """Publish build/ contents to gh-pages branch using `ghp-import`."""
+    command = ["ghp-import", "--cname", CNAME, "--push", "--force", "build/"]
+    process = Popen(command, stdout=PIPE, stderr=PIPE, stdin=PIPE)
+    process.stdin.write(process.stdout.read())

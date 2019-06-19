@@ -7,6 +7,8 @@ PROJECT_DIRECTORY = Path(__file__).parent
 TITLE = "#VítimasDaIntolerância"
 CASE_MAX_CHARS = config("CASE_MAX_CHARS", default=559, cast=int)  # 558 chars + …
 
+CNAME = config("CNAME", default="www.vitimasdaintolerancia.org")
+
 SPREADSHEET_ID = config(
     "SPREADSHEET_ID", default="1C73e7Lph1fNGontBodEDFZ4oqn3cC2oB_0Av3vRTiRw"
 )

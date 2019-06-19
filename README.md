@@ -43,21 +43,12 @@ $ flask run
 
 ## Static files for production
 
-Create the static files version at `build/` with:
+Create the static files version at `build/` and publich it to the `gh-pages`
+branch with:
 
 ```sh
 $ flask build
-```
-
-And push the `gh-pages` branch to GitHub with
-[`ghp-import`](https://github.com/davisp/ghp-import):
-
-```sh
-$ ghp-import \
-    --cname www.vitimasdaintolerancia.org \
-    --push \
-    --force \
-    build/
+$ flask publish
 ```
 
 ## Contributing
